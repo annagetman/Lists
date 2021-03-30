@@ -235,7 +235,7 @@ namespace List
 
 
         //первый индекс по значению
-        public int SearchFirstIndexByValue(int value)
+        public int GetIndexByValue(int value)
         {
             Node current = _root;
 
@@ -270,10 +270,38 @@ namespace List
 
         //реверс(123 -> 321)
 
-        //public void ReverseLinkedList()
-        //{
+        public void ReverseLinkedList()
+        {
+            if (!(this is null))
+            {
+                if (Length > 1)
+                {
+                    Node prev = null;
+                    Node next = null;
+                    Node current = _root;
+                    while (current != null)
+                    {
+                        next = current.Next;
+                        current.Next = prev;
+                        prev = current;
+                        current = next;
+                    }
+                    _root = prev;
+                }
 
-        //}
+                else
+                {
+                    Length = 0;
+                    _root = null;
+                    _tail = null;
+                }
+            }
+            else
+            {
+                throw new NullReferenceException("Error, null");
+            }
+
+        }
 
         //поиск значения максимального элемента
         public int SearchValueMaxElement()
@@ -357,25 +385,42 @@ namespace List
         }
 
         ////сортировка по убыванию
-        //public void DescendingSort(int value)
-        //{
+        public void DescendingSort(int value)
+        {
 
-        //}
+        }
 
-        ////удаление по значению первого(?вернуть индекс)
+        //удаление по значению первого(?вернуть индекс)
+      
+        public void RemoveByValueFirst(int value)
+        {
+            int index = GetIndexByValue(value);
 
-        //public void RemoveElementByValue(int value)
-        //{
-
-        //}
+            if (!(value == -1))
+            {
+                RemoveElementByIndex(index);
+            }
+        }
 
 
         ////удаление по значению всех(?вернуть кол-во)
 
-        //public void RemoveAllElementsByValue(int value)
-        //{
+        public void RemoveByValueAll(int value)
+        {
+            int indexOfElements = GetIndexByValue(value);
 
-        //}
+            while (indexOfElements != -1)
+            {
+                RemoveElementByIndex(indexOfElements);
+                indexOfElements = GetIndexByValue(value);
+            }
+
+        }
+
+        public void AddArrayListByIndex(LinkedList addList, int index)
+        {
+            throw new NotImplementedException();
+        }
 
 
         ////добавление списка(вашего самодельного) в конец

@@ -13,7 +13,7 @@ namespace List
         {
             get
             {
-                Node current = _root;
+                DNode current = _root;
 
                 for (int i = 1; i <= index; i++)
                 {
@@ -24,7 +24,7 @@ namespace List
             }
             set
             {
-                Node current = _root;
+                DNode current = _root;
 
                 for (int i = 1; i <= index; i++)
                 {
@@ -34,8 +34,8 @@ namespace List
             }
         }
 
-        private Node _root;
-        private Node _tail;
+        private DNode _root;
+        private DNode _tail;
 
         public DoubleLinkedList()
         {
@@ -48,7 +48,7 @@ namespace List
         public DoubleLinkedList(int value)
         {
             Length = 1;
-            _root = new Node(value);
+            _root = new DNode(value);
             _tail = _root;
         }
 
@@ -58,12 +58,12 @@ namespace List
 
             if (values.Length != 0)
             {
-                _root = new Node(values[0]);
+                _root = new DNode(values[0]);
                 _tail = _root;
 
                 for (int i = 1; i < values.Length; i++)
                 {
-                    _tail.Next = new Node(values[i]);
+                    _tail.Next = new DNode(values[i]);
                 }
             }
             else
@@ -79,7 +79,7 @@ namespace List
         public void Add(int value)
         {
             Length++;
-            _tail.Next = new Node(value);
+            _tail.Next = new DNode(value);
             _tail = _tail.Next;
         }
 
@@ -89,7 +89,7 @@ namespace List
         {
             Length++;
 
-            Node first = new Node(value);
+            DNode first = new DNode(value);
 
             first.Next = _root;
             _root = first;
@@ -102,16 +102,16 @@ namespace List
         {
             if (Length != 0)
             {
-                Node ByIndex = new Node(value);
+                DNode ByIndex = new DNode(value);
 
-                Node current = GetNodeByIndex(index - 1);
+                DNode current = GetNodeByIndex(index - 1);
 
                 ByIndex.Next = current.Next;
                 current.Next = ByIndex;
             }
             else
             {
-                _root = new Node(value);
+                _root = new DNode(value);
                 _tail = _root;
             }
 
@@ -137,7 +137,7 @@ namespace List
 
         public void RemoveElementByIndex(int index)
         {
-            Node current = _root;
+            DNode current = _root;
 
             for (int i = 1; i < index; i++)
             {
@@ -155,7 +155,7 @@ namespace List
         {
             if (Nvalue != Length)
             {
-                Node current = GetNodeByIndex(Length - Nvalue);
+                DNode current = GetNodeByIndex(Length - Nvalue);
                 current.Next = _tail;
 
                 Length -= Nvalue;
@@ -174,7 +174,7 @@ namespace List
         {
             if (Nvalue != Length)
             {
-                Node current = GetNodeByIndex(Nvalue - 1);
+                DNode current = GetNodeByIndex(Nvalue - 1);
                 _root = current.Next;
 
                 Length -= Nvalue;
@@ -206,8 +206,8 @@ namespace List
                 {
                     if (!(Nvalue + index >= Length))
                     {
-                        Node startNode = GetNodeByIndex(index - 1);
-                        Node finishNode = GetNodeByIndex(index + Nvalue);
+                        DNode startNode = GetNodeByIndex(index - 1);
+                        DNode finishNode = GetNodeByIndex(index + Nvalue);
 
                         startNode.Next = finishNode;
 
@@ -215,7 +215,7 @@ namespace List
                     }
                     else
                     {
-                        Node current = GetNodeByIndex(index);
+                        DNode current = GetNodeByIndex(index);
 
                         current.Next = null;
                         _tail = current;
@@ -238,7 +238,7 @@ namespace List
         //первый индекс по значению
         public int SearchFirstIndexByValue(int value)
         {
-            Node current = _root;
+            DNode current = _root;
 
             for (int i = 0; i < Length; i++)
             {
@@ -258,7 +258,7 @@ namespace List
         {
             if (index >= 0 && index <= Length)
             {
-                Node current = GetNodeByIndex(index);
+                DNode current = GetNodeByIndex(index);
 
                 current.Value = value;
             }
@@ -293,7 +293,7 @@ namespace List
         //поиск индекс максимального элемента
         public int SearchIndexMaxElement()
         {
-            Node current = _root;
+            DNode current = _root;
             int maxIndex = 0;
             int temp = 0;
 
@@ -316,7 +316,7 @@ namespace List
         {
             {
 
-                Node current = _root;
+                DNode current = _root;
                 int minIndex = 0;
                 int temp = current.Value;
 
@@ -386,9 +386,9 @@ namespace List
 
 
 
-        private Node GetNodeByIndex(int index)
+        private DNode GetNodeByIndex(int index)
         {
-            Node current = _root;
+            DNode current = _root;
 
             for (int i = 1; i <= index; i++)
             {
@@ -401,7 +401,7 @@ namespace List
         {
             if (Length != 0)
             {
-                Node current = _root;
+                DNode current = _root;
                 string s = current.Value + " ";
 
                 while (current.Next! is null)
@@ -428,8 +428,8 @@ namespace List
                 if (this.Length == list.Length)
                 {
                     isEqual = true;
-                    Node currentThis = this._root;
-                    Node currentList = list._root;
+                    DNode currentThis = this._root;
+                    DNode currentList = list._root;
 
                     while (!(currentThis is null))
                     {
