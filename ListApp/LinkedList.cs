@@ -12,24 +12,12 @@ namespace List
         {
             get
             {
-                Node current = _root;
-
-                for (int i = 1; i <= index; i++)
-                {
-                    current = current.Next;
-                }
-
-                return current.Value;
+                return GetNodeByIndex(index).Value;
             }
+
             set
             {
-                Node current = _root;
-
-                for (int i = 1; i <= index; i++)
-                {
-                    current = current.Next;
-                }
-                current.Value = value;
+                GetNodeByIndex(index).Value = value;
             }
         }
 
@@ -87,7 +75,6 @@ namespace List
         public void AddToStart(int value)
         {
             Length++;
-
             Node first = new Node(value);
 
             first.Next = _root;
@@ -384,14 +371,9 @@ namespace List
 
         }
 
-        ////сортировка по убыванию
-        public void DescendingSort(int value)
-        {
-
-        }
 
         //удаление по значению первого(?вернуть индекс)
-      
+
         public void RemoveByValueFirst(int value)
         {
             int index = GetIndexByValue(value);
@@ -416,12 +398,6 @@ namespace List
             }
 
         }
-
-        public void AddArrayListByIndex(LinkedList addList, int index)
-        {
-            throw new NotImplementedException();
-        }
-
 
         ////добавление списка(вашего самодельного) в конец
         public void AddLinkedList(LinkedList secondList)
@@ -526,16 +502,13 @@ namespace List
 
 
 
-        private Node GetNodeByIndex(int index)
-        {
-            Node current = _root;
 
-            for (int i = 1; i <= index; i++)
-            {
-                current = current.Next;
-            }
-            return current;
-        }
+
+        
+
+
+
+
 
         public override string ToString()
         {
@@ -544,11 +517,12 @@ namespace List
                 Node current = _root;
                 string s = current.Value + " ";
 
-                while (current.Next! is null)
+                while (!(current.Next is null))
                 {
                     current = current.Next;
                     s += current.Value + " ";
                 }
+
                 return s;
             }
             else
@@ -564,13 +538,11 @@ namespace List
             {
                 LinkedList list = (LinkedList)obj;
                 bool isEqual = false;
-
                 if (this.Length == list.Length)
                 {
                     isEqual = true;
                     Node currentThis = this._root;
                     Node currentList = list._root;
-
                     while (!(currentThis is null))
                     {
                         if (currentThis.Value != currentList.Value)
@@ -578,17 +550,34 @@ namespace List
                             isEqual = false;
                             break;
                         }
-
                         currentThis = currentThis.Next;
                         currentList = currentList.Next;
                     }
                 }
-
                 return isEqual;
             }
 
-            throw new ArgumentException("obj is not LinkedList");
+            throw new ArgumentException("obj is not List");
         }
+
+        private Node GetNodeByIndex(int index)
+        {
+            Node current = _root;
+
+            for (int i = 1; i <= index; i++)
+            {
+                current = current.Next;
+            }
+            return current;
+        }
+
+
+
+
+
+
+
+
     }
 }
 
