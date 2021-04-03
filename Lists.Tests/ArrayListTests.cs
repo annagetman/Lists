@@ -5,7 +5,6 @@ using System.Text;
 
 namespace List.Tests
 {
-
     public class ArrayListTests
     {
         [TestCase(1, new int[] { 5, 10, 15 }, 10)]
@@ -489,9 +488,6 @@ namespace List.Tests
 
             Assert.AreEqual(expected, actual);
         }
-
-
-
 
     }
 }

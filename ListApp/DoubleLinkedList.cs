@@ -702,10 +702,10 @@ namespace List
         {
             DNode current;
 
-            if (index > Length / 2 + 1) //+1
+            if (index > Length / 2 + 1) 
             {
                 current = _tail;
-                for (int i = Length - 1; i > index; i--) //>=
+                for (int i = Length - 1; i > index; i--) 
                 {
                     current = current.Previous;
                 }
