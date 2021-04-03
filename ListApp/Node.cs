@@ -12,7 +12,6 @@ namespace List
             public Node ( int value)
         {
             Value = value;
-
             Next = null;
         }
 

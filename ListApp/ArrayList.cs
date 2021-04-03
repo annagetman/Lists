@@ -8,61 +8,68 @@ namespace List
 
         public int Length { get; private set; }
 
+        public int this[int index]
+        {
+            get
+            {
+                if ((index < Length) && (index >= 0))
+                {
+                    return _array[index];
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+            set
+            {
+                if ((index < Length) && (index >= 0))
+                {
+                    _array[index] = value;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
         private int[] _array;
 
         public ArrayList()
         {
             Length = 0;
-
             _array = new int[10];
         }
 
         public ArrayList(int value)
         {
-            Length = 0;
-
+            Length = 1;
             _array = new int[10];
-
             _array[0] = value;
         }
 
-        public int this[int index]
+        private ArrayList(int[] array)
         {
-            get
+            Length = array.Length;
+
+            _array = new int[Length];
+
+            for (int i = 0; i < Length; i++)
             {
-                if (index > Length - 1 || index < 0)
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                return _array[index];
-            }
-            set
-            {
-                if (index > Length - 1 || index < 0)
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                _array[index] = value;
+                _array[i] = array[i];
             }
         }
-
-
-        public ArrayList(int[] values)
+        public static ArrayList Create(int[] values)
         {
-            if (values != null)
+            if (!(values is null))
             {
-                Length = values.Length;
-                _array = new int[(int)(values.Length * 2)];
-                for (int i = 0; i < Length; i++)
-                {
-                    _array[i] = values[i];
-                }
+                return new ArrayList(values);
             }
-            else
-            {
-                throw new ArgumentException("Array is null");
-            }
+
+            throw new NullReferenceException("Values is null");
         }
+
 
 
         //добавление значения в конец
@@ -81,19 +88,19 @@ namespace List
 
         public void AddToStart(int value)
         {
-            if (Length == _array.Length)
+            if (Length >= _array.Length)
             {
                 ReSize();
             }
 
-            for (int i = Length; i >= 0; --i)
+            for (int i = Length - 1; i >= 0; i--)
             {
                 _array[i + 1] = _array[i];
-
             }
+
             _array[0] = value;
 
-            Length++;
+            ++Length;
         }
 
         //добавление значения по индексу
@@ -131,43 +138,68 @@ namespace List
 
         public void RemoveElementFromEnd()
         {
-            ReSize();
+            if (!(Length == 0))
+            {
+                Length--;
+            }
 
-            Length--;
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+            ReSize();
 
         }
 
         //удаление из начала одного элемента
         public void RemoveElementFromStart()
         {
-
-            for (int i = 1; i <= Length; i++)
+            for (int i = 1; i < Length; i++)
             {
                 _array[i - 1] = _array[i];
             }
+
+            ReSize();
 
             if (!(Length == 0))
             {
                 Length--;
             }
 
-            ReSize();
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         //удаление по индексу одного элемента
 
         public void RemoveElementByIndex(int index)
         {
-            if (index >= 0 && index <= Length)
+            if (index < Length && index >= 0)
             {
-
-                for (int i = index; i < Length; i++)
+                if (index == 0)
                 {
-                    _array[i] = _array[i + 1];
+                    RemoveElementFromStart();
                 }
+                else if (index == Length - 1)
+                {
+                    RemoveElementFromStart();
+                }
+                else
+                {
+                    Length--;
+                    for (int i = index; i < Length; i++)
+                    {
+                        _array[i] = _array[i + 1];
+                    }
 
-                --Length;
-                ReSize();
+                    ReSize();
+                }
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
             }
 
         }
@@ -176,45 +208,97 @@ namespace List
         //удаление из конца N элементов
         public void RemoveNElementsFromEnd(int Nvalue)
         {
-            Length -= Nvalue;
-            ReSize();
+            if (Nvalue < Length)
+            {
+                if (!(Nvalue < 0))
+                {
+                    Length -= Nvalue;
+                    ReSize();
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid value!");
+                }
+            }
+
+            else if (Nvalue == Length)
+            {
+                Length = 0;
+                _array = new int[10];
+            }
+
+            else
+            {
+                throw new IndexOutOfRangeException("Index out of range!");
+            }
         }
 
 
         //удаление из начала N элементов
         public void RemoveNElementsFromStart(int Nvalue)
         {
-            if (Nvalue < Length && Nvalue >= 0)
+            if (Nvalue < Length)
             {
-
-                for (int i = Nvalue; i <= Length; i++)
+                if (!(Nvalue < 0))
                 {
-                    _array[i - Nvalue] = _array[i];
+                    for (int i = Nvalue; i < Length; i++)
+                    {
+                        _array[i - Nvalue] = _array[i];
+                    }
+
+                    Length -= Nvalue;
+                    ReSize();
                 }
 
-                Length -= Nvalue;
-                ReSize();
+                else
+                {
+                    throw new ArgumentException("Invalid value");
+                }
+            }
+
+            else if (Nvalue == Length)
+            {
+                Length = 0;
+                _array = new int[10];
+            }
+
+            else
+            {
+                throw new IndexOutOfRangeException("Index out of range!");
             }
         }
 
         //удаление по индексу N элементов
         public void RemoveNElementByIndex(int index, int Nvalue)
         {
-            if (index < Length && index >= 0 && Length - Nvalue > 0)
+            if (Nvalue < Length)
             {
-
-                for (int i = index + Nvalue; i <= Length; i++)
+                if (!(Nvalue < 0))
                 {
-                    _array[i - Nvalue] = _array[i];
+                    for (int i = index + Nvalue; i < Length; i++)
+                    {
+                        _array[i - Nvalue] = _array[i];
+                    }
+
+                    Length -= Nvalue;
+                    ReSize();
                 }
 
-                Length -= Nvalue;
-                ReSize();
-
+                else
+                {
+                    throw new ArgumentException("Invalid value");
+                }
             }
+
+            else if (Nvalue == Length)
+            {
+                Length = 0;
+                _array = new int[10];
+            }
+
             else
             {
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException("Index out of range!");
             }
         }
 
@@ -340,7 +424,6 @@ namespace List
             }
         }
 
-
         //сортировка по убыванию
         public void DescendingSort()
         {
@@ -364,38 +447,29 @@ namespace List
 
         //удаление по значению первого(?вернуть индекс)
 
-        public int RemoveElementByValue(int value)
+        public void RemoveElementByValue(int value)
         {
-            for (int i = 0; i < Length; i++)
-            {
-                if (_array[i].CompareTo(value) == 0)
-                {
-                    RemoveElementByIndex(i);
-                    return i;
-                }
-            }
+            int index = SearchFirstIndexByValue(value);
 
-            return -1;
+            if (!(index == -1))
+            {
+                RemoveElementByIndex(index);
+            }
         }
 
-    
+
 
         //удаление по значению всех(?вернуть кол-во)
 
-        public int RemoveAllElementsByValue(int value)
+        public void RemoveAllElementsByValue(int value)
         {
-            int countRemoveElements = 0;
-            for (int i = 0; i < Length; i++)
-            {
-                if (_array[i].CompareTo(value) == 0)
-                {
-                    RemoveElementByIndex(i);
-                    --i;
-                    ++countRemoveElements;
-                }
-            }
+            int indexOfElements = SearchFirstIndexByValue(value);
 
-            return countRemoveElements;
+            while (indexOfElements != -1)
+            {
+                RemoveElementByIndex(indexOfElements);
+                indexOfElements = SearchFirstIndexByValue(value);
+            }
         }
 
 
@@ -407,9 +481,7 @@ namespace List
                 AddArrayListByIndex(list, lastIndex);
             }
         }
-
-
-      
+     
         //добавление списка в начало
 
         public void AddArrayListToStart(ArrayList list)
@@ -420,7 +492,6 @@ namespace List
                 AddArrayListByIndex(list, firstIndex);
             }
         }
-
 
         //добавление списка по индексу
 
@@ -468,28 +539,28 @@ namespace List
         }
 
 
-        public void DescendingSort(bool v)
+        private void ReSize()
         {
-            throw new NotImplementedException();
-        }
-
-        public override string ToString()
-        {
-            string result = string.Empty;
-            for (int i = 0; i < Length; i++)
+            if (Length >= _array.Length)
             {
-                result += _array[i] + " ";
+                int newLenght = (int)(Length * 1.33 + 1);
+                int[] tmpArray = new int[newLenght];
+
+                for (int i = 0; i < _array.Length; i++)
+                {
+                    tmpArray[i] = _array[i];
+                }
+
+                _array = tmpArray;
             }
-
-            return result;
         }
-
 
         public override bool Equals(object obj)
         {
             ArrayList list = (ArrayList)obj;
             if (this.Length != list.Length)
             {
+
                 return false;
             }
 
@@ -504,38 +575,17 @@ namespace List
             return true;
         }
 
-
-        private void Swap(ref int a, ref int b)
+        public override string ToString()
         {
-            int temp = 0;
-            temp = a;
-            a = b;
-            b = temp;
-        }
-       
-
-        private void ReSize()
-        {
-            if ((Length >= _array.Length) || (Length <= _array.Length / 2))
+            string result = string.Empty;
+            for (int i = 0; i < Length; i++)
             {
-                int newLenght = (int)(_array.Length * 1.33 + 1);
-                int[] tmpArray = new int[newLenght];
+                result += _array[i] + " ";
 
-                for (int i = 0; i < Length; i++)
-                {
-                    tmpArray[i] = _array[i];
-                }
-
-                _array = tmpArray;
             }
 
-
-
-
-
-
-
-
+            result.Trim();
+            return result;
         }
     }
 }

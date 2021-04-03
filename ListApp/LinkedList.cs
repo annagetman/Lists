@@ -7,7 +7,6 @@ namespace List
     public class LinkedList
     {
         public int Length { get; private set; }
-
         public int this[int index]
         {
             get
@@ -29,9 +28,7 @@ namespace List
             Length = 0;
             _root = null;
             _tail = null;
-
         }
-
         public LinkedList(int value)
         {
             Length = 1;
@@ -41,6 +38,8 @@ namespace List
 
         public LinkedList(int[] values)
         {
+            //if(values is null)
+
             Length = values.Length;
 
             if (values.Length != 0)
@@ -51,6 +50,7 @@ namespace List
                 for (int i = 1; i < values.Length; i++)
                 {
                     _tail.Next = new Node(values[i]);
+                    _tail = _tail.Next;
                 }
             }
             else
@@ -58,146 +58,216 @@ namespace List
                 _root = null;
                 _tail = null;
             }
+
         }
 
-
-
-        //добавление значения в конец
         public void Add(int value)
-        {
-            Length++;
-            _tail.Next = new Node(value);
-            _tail = _tail.Next;
-        }
-
-        //добавление значения в начало
-
-        public void AddToStart(int value)
-        {
-            Length++;
-            Node first = new Node(value);
-
-            first.Next = _root;
-            _root = first;
-        }
-
-
-        //добавление значения по индексу
-
-        public void AddValueByIndex(int value, int index)
         {
             if (Length != 0)
             {
-                Node ByIndex = new Node(value);
-
-                Node current = GetNodeByIndex(index - 1);
-
-                ByIndex.Next = current.Next;
-                current.Next = ByIndex;
+                _tail.Next = new Node(value);
+                _tail = _tail.Next;
             }
             else
             {
                 _root = new Node(value);
                 _tail = _root;
             }
-
             Length++;
+
         }
 
-        //удаление из конца одного элемента
-
-        public void RemoveElementFromEnd()
+        public void AddValueToStart(int value)
         {
-            RemoveElementByIndex(Length - 1);
+            if (Length != 0)
+            {
+                Length++;
+                Node first = new Node(value);
+
+                first.Next = _root;
+                _root = first;
+            }
+
+            else
+            {
+                _root = new Node(value);
+                _tail = _root;
+                Length++;
+            }
 
         }
 
-        //удаление из начала одного элемента
-        public void RemoveElementFromStart()
+        public void AddValueByIndex(int value, int index)
+        {
+            if (index >= 0 && index <= Length)
+            {
+                if (Length != 0)
+                {
+                    if (index == 0)
+                    {
+                        AddValueToStart(value);
+                        Length--;
+                    }
+                    else
+                    {
+                        Node nodeByIndex = new Node(value);
+
+                        Node current = GetNodeByIndex(index - 1);
+
+                        nodeByIndex.Next = current.Next;
+                        current.Next = nodeByIndex;
+                    }
+                }
+                else
+                {
+                    _root = new Node(value);
+                    _tail = _root;
+                }
+
+                Length++;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException("Out of range!");
+            }
+
+        }
+
+        public void RemoveLastElement()
+        {
+            RemoveByIndex(Length - 1);
+        }
+
+        public void RemoveFirst()
         {
             _root = _root.Next;
             Length--;
         }
 
-        //удаление по индексу одного элемента
-
-        public void RemoveElementByIndex(int index)
+        public void RemoveByIndex(int index)
         {
-            Node current = _root;
-
-            for (int i = 1; i < index; i++)
+            if (index >= 0 && index <= Length)
             {
-                current = current.Next;
-            }
+                if (Length != 0)
+                {
+                    if (index != 0)
+                    {
+                        Node current = _root;
 
-            current.Next = current.Next.Next;
+                        for (int i = 1; i < index; i++)
+                        {
+                            current = current.Next;
+                        }
 
-            Length--;
-        }
+                        current.Next = current.Next.Next;
 
+                        Length--;
+                    }
+                    else
+                    {
+                        RemoveFirst();
+                    }
 
-        //удаление из конца N элементов
-        public void RemoveNElementsFromEnd(int Nvalue)
-        {
-            if (Nvalue != Length)
-            {
-                Node current = GetNodeByIndex(Length - Nvalue);
-                current.Next = _tail;
-
-                Length -= Nvalue;
+                }
+                else
+                {
+                    Length = 0;
+                    _root = null;
+                    _tail = null;
+                }
             }
             else
+            {
+                throw new IndexOutOfRangeException("Error");
+            }
+        }
+
+        public void RemovNElementsFromLast(int nvalue) 
+        {
+            if (nvalue < Length)
+            {
+                if (!(nvalue < 0))
+                {
+                    Node current = GetNodeByIndex(Length - nvalue);
+                    current.Next = _tail;
+                    _tail.Next = null;
+
+                    Length -= nvalue;
+                }
+
+                else
+                {
+                    throw new ArgumentException("Invalid value!");
+                }
+            }
+            else if (nvalue == Length)
             {
                 Length = 0;
                 _root = null;
                 _tail = null;
             }
+
+            else
+            {
+                throw new IndexOutOfRangeException("Out of range!");
+            }
         }
 
-
-        //удаление из начала N элементов
-        public void RemoveNElementsFromStart(int Nvalue)
+        public void RemovNElementsFromStart(int nvalue)
         {
-            if (Nvalue != Length)
+            if (nvalue < Length)
             {
-                Node current = GetNodeByIndex(Nvalue - 1);
-                _root = current.Next;
+                if (!(nvalue < 0))
+                {
+                    Node current = GetNodeByIndex(nvalue - 1);
+                    _root = current.Next;
 
-                Length -= Nvalue;
+                    Length -= nvalue;
+                }
+
+                else
+                {
+                    throw new ArgumentException("Invalid value!");
+                }
             }
-            else
+
+            else if (nvalue == Length)
             {
                 Length = 0;
                 _root = null;
                 _tail = null;
             }
+
+            else
+            {
+                throw new IndexOutOfRangeException("Out of range!");
+            }
         }
 
-        //удаление по индексу N элементов
-        public void RemoveNElementByIndex(int index, int Nvalue)
+        public void RemoveByIndexNElements(int nvalue, int index)
         {
             if (index >= 0 && index < Length)
             {
                 if (index == 0)
                 {
-                    RemoveNElementsFromStart(Nvalue);
+                    RemovNElementsFromStart(nvalue);
                 }
 
-                else if (Nvalue == Length - 1)
+                else if (nvalue == Length - 1)
                 {
-                    RemoveNElementsFromEnd(Nvalue);
+                    RemovNElementsFromLast(nvalue);
                 }
 
-                else if (Nvalue > 0)
+                else if (nvalue > 0)
                 {
-                    if (!(Nvalue + index >= Length))
+                    if (!(nvalue + index >= Length))
                     {
                         Node startNode = GetNodeByIndex(index - 1);
-                        Node finishNode = GetNodeByIndex(index + Nvalue);
+                        Node finishNode = GetNodeByIndex(index + nvalue);
 
                         startNode.Next = finishNode;
 
-                        Length -= Nvalue;
+                        Length -= nvalue;
                     }
                     else
                     {
@@ -215,13 +285,10 @@ namespace List
             }
             else
             {
-                throw new IndexOutOfRangeException("Error!");
+                throw new IndexOutOfRangeException("Out of range!");
             }
         }
 
-
-
-        //первый индекс по значению
         public int GetIndexByValue(int value)
         {
             Node current = _root;
@@ -239,7 +306,6 @@ namespace List
             return -1;
         }
 
-
         public void GetChangeByIndex(int index, int value)
         {
             if (index >= 0 && index <= Length)
@@ -250,14 +316,11 @@ namespace List
             }
             else
             {
-                throw new IndexOutOfRangeException("Error");
+                throw new IndexOutOfRangeException("Out of range!");
             }
-
         }
 
-        //реверс(123 -> 321)
-
-        public void ReverseLinkedList()
+        public void Revers()
         {
             if (!(this is null))
             {
@@ -273,6 +336,8 @@ namespace List
                         prev = current;
                         current = next;
                     }
+
+                    _tail = _root;
                     _root = prev;
                 }
 
@@ -287,49 +352,38 @@ namespace List
             {
                 throw new NullReferenceException("Error, null");
             }
-
         }
-
-        //поиск значения максимального элемента
-        public int SearchValueMaxElement()
+        public int FindIndexOfMaxElem()
         {
-            return SearchIndexMaxElement();
-
-        }
-
-        //поиск значения минимального элемента
-        public int SearchValueMinElement()
-        {
-            return SearchIndexMinElement();
-
-        }
-
-        //поиск индекс максимального элемента
-        public int SearchIndexMaxElement()
-        {
-            Node current = _root;
-            int maxIndex = 0;
-            int temp = 0;
-
-            for (int i = 0; i < Length; i++)
+            if (Length != 0 || this is null)
             {
-                if (temp < current.Value)
+                Node current = _root;
+                int maxIndex = 0;
+                int temp = 0;
+
+                for (int i = 0; i < Length; i++)
                 {
-                    maxIndex = i;
-                    temp = current.Value;
+                    if (temp < current.Value)
+                    {
+                        maxIndex = i;
+                        temp = current.Value;
+                    }
+
+                    current = current.Next;
                 }
 
-                current = current.Next;
+                return maxIndex;
             }
-
-            return maxIndex;
-        }
-        //поиск индекс минимального элемента
-
-        public int SearchIndexMinElement()
-        {
+            else
             {
+                throw new ArgumentException("List is null");
+            }
+        }
 
+        public int FindIndexOfMinElem()
+        {
+            if (Length != 0 || this is null)
+            {
                 Node current = _root;
                 int minIndex = 0;
                 int temp = current.Value;
@@ -347,10 +401,23 @@ namespace List
 
                 return minIndex;
             }
+            else
+            {
+                throw new ArgumentException("List is null");
+            }
         }
 
-        //сортировка по возрастанию
-        public void SortAscending()
+        public int FindValueOfMaxElem()
+        {
+            return FindIndexOfMaxElem();
+        }
+
+        public int FindValueOfMinElem()
+        {
+            return FindIndexOfMinElem();
+        }
+
+        public void GetSortByAscending()
         {
             for (int i = 0; i < Length; i++)
             {
@@ -368,11 +435,27 @@ namespace List
                 GetNodeByIndex(i).Value = GetNodeByIndex(min).Value;
                 GetNodeByIndex(min).Value = temp;
             }
-
         }
 
+        public void GetDescendingSort()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                int max = i;
 
-        //удаление по значению первого(?вернуть индекс)
+                for (int j = i + 1; j < Length; j++)
+                {
+                    if (GetNodeByIndex(max).Value < GetNodeByIndex(j).Value)
+                    {
+                        max = j;
+                    }
+                }
+
+                int temp = GetNodeByIndex(i).Value;
+                GetNodeByIndex(i).Value = GetNodeByIndex(max).Value;
+                GetNodeByIndex(max).Value = temp;
+            }
+        }
 
         public void RemoveByValueFirst(int value)
         {
@@ -380,12 +463,9 @@ namespace List
 
             if (!(value == -1))
             {
-                RemoveElementByIndex(index);
+                RemoveByIndex(index);
             }
         }
-
-
-        ////удаление по значению всех(?вернуть кол-во)
 
         public void RemoveByValueAll(int value)
         {
@@ -393,28 +473,31 @@ namespace List
 
             while (indexOfElements != -1)
             {
-                RemoveElementByIndex(indexOfElements);
+                RemoveByIndex(indexOfElements);
                 indexOfElements = GetIndexByValue(value);
             }
-
         }
 
-        ////добавление списка(вашего самодельного) в конец
-        public void AddLinkedList(LinkedList secondList)
+
+
+
+        public void AddListToTheEnd(LinkedList secondList)
         {
             if (Length != 0)
             {
-                if (secondList != null)
+                if (secondList.Length != 0)
                 {
                     _tail.Next = secondList._root;
                     Length += secondList.Length;
 
                 }
+
                 else
                 {
                     throw new ArgumentException("No elements in list!");
                 }
             }
+
             else
             {
                 _root = secondList._root;
@@ -422,40 +505,38 @@ namespace List
 
                 Length = secondList.Length;
             }
-
         }
 
-        ////добавление списка в начало
-
-        public void AddLinkedListToStart(LinkedList secondList)
+        public void AddListToStart(LinkedList secondList)
         {
-            if (secondList != null)
+            if (Length != 0)
             {
-                if (Length != 0)
+                if (secondList.Length != 0)
                 {
                     secondList._tail.Next = _root;
                     _root = secondList._root;
 
                     Length += secondList.Length;
                 }
+
                 else
                 {
-                    _root = secondList._root;
-                    _tail = secondList._tail;
-
-                    Length = secondList.Length;
+                    throw new ArgumentException("No elements in list!");
                 }
             }
+
             else
             {
-                throw new ArgumentException("No elements in list!");
+                _root = secondList._root;
+                _tail = secondList._tail;
+
+                Length = secondList.Length;
             }
         }
 
-        ////добавление списка по индексу
-        public void AddLinkedListByIndex(LinkedList secondList, int index)
+        public void AddListByIndex(LinkedList secondList, int index)
         {
-            if (secondList != null)
+            if (secondList.Length != 0)
             {
                 if (index >= 0 && index <= Length)
                 {
@@ -463,8 +544,9 @@ namespace List
                     {
                         if (index == 0)
                         {
-                            AddLinkedListToStart(secondList);
+                            AddListToStart(secondList);
                         }
+
                         else
                         {
                             Node current = GetNodeByIndex(index - 1);
@@ -475,6 +557,7 @@ namespace List
                             Length += secondList.Length;
                         }
                     }
+
                     else
                     {
                         _root = secondList._root;
@@ -503,13 +586,6 @@ namespace List
 
 
 
-
-        
-
-
-
-
-
         public override string ToString()
         {
             if (Length != 0)
@@ -530,7 +606,6 @@ namespace List
                 return String.Empty;
             }
         }
-
 
         public override bool Equals(object obj)
         {
@@ -554,6 +629,7 @@ namespace List
                         currentList = currentList.Next;
                     }
                 }
+
                 return isEqual;
             }
 
@@ -570,14 +646,6 @@ namespace List
             }
             return current;
         }
-
-
-
-
-
-
-
-
     }
 }
 
