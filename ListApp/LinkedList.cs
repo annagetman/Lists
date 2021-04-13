@@ -61,9 +61,6 @@ namespace List
 
         }
 
-
-
-
         public void Add(int value)
         {
             if (Length != 0)
@@ -184,7 +181,7 @@ namespace List
                 throw new IndexOutOfRangeException("Error");
             }
         }
-
+      
         public void RemovNElementsFromLast(int nvalue) 
         {
             if (nvalue < Length)
@@ -227,7 +224,6 @@ namespace List
 
                     Length -= nvalue;
                 }
-
                 else
                 {
                     throw new ArgumentException("Invalid value!");
@@ -330,7 +326,7 @@ namespace List
                 if (Length > 1)
                 {
                     Node prev = null;
-                    Node next = null;
+                    Node next;
                     Node current = _root;
                     while (current != null)
                     {
@@ -356,6 +352,7 @@ namespace List
                 throw new NullReferenceException("Error, null");
             }
         }
+
         public int FindIndexOfMaxElem()
         {
             if (Length != 0 || this is null)
@@ -412,7 +409,23 @@ namespace List
 
         public int FindValueOfMaxElem()
         {
-            return FindIndexOfMaxElem();
+            if (Length != 0)
+            {
+                int min = _root.Value;
+
+                for (int i = 0; i < Length; i++)
+                {
+                    if (GetNodeByIndex(i).Value < min)
+                    {
+                        min = GetNodeByIndex(i).Value;
+                    }
+                }
+                return min;
+            }
+            else
+            {
+                throw new ArgumentException("Length is 0 , no elements");
+            }
         }
 
         public int FindValueOfMinElem()
@@ -480,9 +493,6 @@ namespace List
                 indexOfElements = GetIndexByValue(value);
             }
         }
-
-
-
 
         public void AddListToTheEnd(LinkedList secondList)
         {

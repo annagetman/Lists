@@ -238,14 +238,13 @@ namespace List.Tests
         [TestCase(0, 0, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 })]
         [TestCase(1, 1, new int[] { 1, 2, 3 }, new int[] { 1, 3 })]
         [TestCase(2, 2, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2 })]
-        [TestCase(0, 3, new int[] { 1, 2, 3 }, new int[] { })]
 
         public void RemoveNElementByIndex_WhenIndexAndNElements_RemoveNElementByIndex(int index, int Nvalue, int[] actualArray, int[] expectedArray)
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
 
-            actual.RemoveNElementByIndex(index, Nvalue);
+            actual.RemoveNElementsByIndex(index, Nvalue);
 
             Assert.AreEqual(expected, actual);
         }
@@ -257,7 +256,7 @@ namespace List.Tests
             Assert.Throws<ArgumentException>(() =>
             {
                 ArrayList actual = ArrayList.Create(actualArray);
-                actual.RemoveNElementByIndex(index, Nvalue);
+                actual.RemoveNElementsByIndex(index, Nvalue);
             });
         }
 

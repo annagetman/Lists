@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Text;
 
 namespace List
 {
-
     public class ArrayList
     {
+        private int[] _array;
+
         public int Length { get; private set; }
 
         public int this[int index]
@@ -33,8 +35,6 @@ namespace List
             }
         }
 
-        private int[] _array;
-
         public ArrayList()
         {
             Length = 0;
@@ -59,6 +59,7 @@ namespace List
                 _array[i] = array[i];
             }
         }
+
         public static ArrayList Create(int[] values)
         {
             if (!(values is null))
@@ -69,26 +70,19 @@ namespace List
             throw new NullReferenceException("Values is null");
         }
 
-        //добавление значения в конец
         public void Add(int value)
         {
-            if (Length == _array.Length)
-            {
                 ReSize();
-            }
+            
             _array[Length] = value;
             Length++;
         }
 
         //добавление значения в начало
-
         public void AddToStart(int value)
         {
-            if (Length >= _array.Length)
-            {
                 ReSize();
-            }
-
+           
             for (int i = Length - 1; i >= 0; i--)
             {
                 _array[i + 1] = _array[i];
@@ -103,10 +97,8 @@ namespace List
 
         public void AddValueByIndex(int value, int index)
         {
-
             if (index <= Length && index >= 0)
             {
-
                 if (Length >= _array.Length)
                 {
                     ReSize();
@@ -118,16 +110,12 @@ namespace List
                 }
 
                 _array[index] = value;
-
                 ++Length;
-
-
             }
             else
             {
                 throw new IndexOutOfRangeException();
             }
-
         }
 
         //удаление из конца одного элемента
@@ -138,11 +126,11 @@ namespace List
             {
                 Length--;
             }
-
             else
             {
                 throw new IndexOutOfRangeException();
             }
+
             ReSize();
 
         }
@@ -184,6 +172,7 @@ namespace List
                 else
                 {
                     Length--;
+
                     for (int i = index; i < Length; i++)
                     {
                         _array[i] = _array[i + 1];
@@ -254,7 +243,6 @@ namespace List
                 Length = 0;
                 _array = new int[10];
             }
-
             else
             {
                 throw new IndexOutOfRangeException("Index out of range!");
@@ -262,36 +250,36 @@ namespace List
         }
 
         //удаление по индексу N элементов
-        public void RemoveNElementByIndex(int index, int Nvalue)
+        public void RemoveNElementsByIndex(int Nvalue, int index)
         {
-            if (Nvalue < Length)
+            if (index >= 0 && index < Length && Nvalue >= 0)
             {
-                if (!(Nvalue < 0))
+                if (Nvalue + index > Length)
                 {
-                    for (int i = index + Nvalue; i < Length; i++)
+                    Length = index;
+                }
+                else
+                {
+                    for (int i = index; i < Length; i++)
                     {
-                        _array[i - Nvalue] = _array[i];
+                        if (i + Nvalue < _array.Length)
+                        {
+                            _array[i] = _array[i + Nvalue];
+                        }
                     }
 
                     Length -= Nvalue;
-                    ReSize();
                 }
 
-                else
-                {
-                    throw new ArgumentException("Invalid value");
-                }
+                ReSize();
             }
-
-            else if (Nvalue == Length)
+            else if (Nvalue < 0)
             {
-                Length = 0;
-                _array = new int[10];
+                throw new ArgumentException("Incorrect n");
             }
-
             else
             {
-                throw new IndexOutOfRangeException("Index out of range!");
+                throw new IndexOutOfRangeException();
             }
         }
 
@@ -335,7 +323,6 @@ namespace List
         {
             if (!(Length == 0))
             {
-
                 int maxIndexOfElement = 0;
 
                 for (int i = 1; i < Length; i++)
@@ -394,7 +381,7 @@ namespace List
         }
 
         //сортировка по возрастанию
-        public void SortAscending()
+        public void SortAscending()//
         {
             int j;
             int temp;
@@ -542,6 +529,10 @@ namespace List
         }
         public override bool Equals(object obj)
         {
+            if (obj is null)
+            {
+                throw new ArgumentNullException();
+            }
             ArrayList list = (ArrayList)obj;
             if (this.Length != list.Length)
             {
@@ -561,15 +552,21 @@ namespace List
         }
         public override string ToString()
         {
-            string result = string.Empty;
+            StringBuilder result = new StringBuilder();
+
             for (int i = 0; i < Length; i++)
             {
-                result += _array[i] + " ";
-
+                if (i == Length - 1)
+                {
+                    result.Append(_array[i]);
+                }
+                else
+                {
+                    result.Append(_array[i] + " ");
+                }
             }
 
-            result.Trim();
-            return result;
+            return result.ToString();
         }
     }
 }

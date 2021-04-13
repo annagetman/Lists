@@ -643,11 +643,6 @@ namespace List
                 throw new ArgumentException("No elements in list!");
             }
         }
-
-
-
-
-
         public override string ToString()
         {
             if (Length != 0)
