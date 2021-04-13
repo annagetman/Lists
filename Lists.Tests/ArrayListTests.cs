@@ -337,9 +337,9 @@ namespace List.Tests
 
 
         [TestCase(new int[] { 0, 1, 2, 3 }, 3)]
-        [TestCase(new int[] { 3, 4, 5 }, 2)]
+        [TestCase(new int[] { 3, 4, 5 }, 5)]
         [TestCase(new int[] { 0 }, 0)]
-        [TestCase(new int[] { 8, 7, 5 }, 0)]
+        [TestCase(new int[] { 8, 7, 5 }, 8)]
         public void Search_ValueMaxElement(int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);
@@ -360,9 +360,9 @@ namespace List.Tests
 
 
         [TestCase(new int[] { 0, 1, 2, 3 }, 0)]
-        [TestCase(new int[] { 8, 7, 6 }, 2)]
+        [TestCase(new int[] { 8, 7, 6 }, 6)]
         [TestCase(new int[] { 0 }, 0)]
-        [TestCase(new int[] { 3, 5, 7, 6 }, 0)]
+        [TestCase(new int[] { 3, 5, 7, 6 }, 3)]
         public void Search_ValueMinElement(int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);

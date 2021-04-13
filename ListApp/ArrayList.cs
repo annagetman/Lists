@@ -5,7 +5,6 @@ namespace List
 
     public class ArrayList
     {
-
         public int Length { get; private set; }
 
         public int this[int index]
@@ -70,8 +69,6 @@ namespace List
             throw new NullReferenceException("Values is null");
         }
 
-
-
         //добавление значения в конец
         public void Add(int value)
         {
@@ -82,7 +79,6 @@ namespace List
             _array[Length] = value;
             Length++;
         }
-
 
         //добавление значения в начало
 
@@ -173,7 +169,6 @@ namespace List
         }
 
         //удаление по индексу одного элемента
-
         public void RemoveElementByIndex(int index)
         {
             if (index < Length && index >= 0)
@@ -204,7 +199,6 @@ namespace List
 
         }
 
-
         //удаление из конца N элементов
         public void RemoveNElementsFromEnd(int Nvalue)
         {
@@ -232,7 +226,6 @@ namespace List
                 throw new IndexOutOfRangeException("Index out of range!");
             }
         }
-
 
         //удаление из начала N элементов
         public void RemoveNElementsFromStart(int Nvalue)
@@ -302,7 +295,6 @@ namespace List
             }
         }
 
-
         //первый индекс по значению
         public int SearchFirstIndexByValue(int value)
         {
@@ -322,7 +314,6 @@ namespace List
         }
 
         //реверс(123 -> 321)
-
         public void ReverseArray()
         {
             int temp;
@@ -337,21 +328,6 @@ namespace List
 
                 _array[swapIndex] = temp;
             }
-        }
-
-
-        //поиск значения максимального элемента
-        public int SearchValueMaxElement()
-        {
-          
-            return SearchIndexMaxElement();
-        }
-
-        //поиск значения минимального элемента
-        public int SearchValueMinElement()
-        {
-            return SearchIndexMinElement();
-
         }
 
         //поиск индекс максимального элемента
@@ -401,6 +377,20 @@ namespace List
             {
                 throw new ArgumentException();
             }
+        }
+
+        //поиск значения максимального элемента
+        public int SearchValueMaxElement()
+        {
+
+            return _array[SearchIndexMaxElement()];
+        }
+
+        //поиск значения минимального элемента
+        public int SearchValueMinElement()
+        {
+            return _array[SearchIndexMinElement()];
+
         }
 
         //сортировка по возрастанию
@@ -457,8 +447,6 @@ namespace List
             }
         }
 
-
-
         //удаление по значению всех(?вернуть кол-во)
 
         public void RemoveAllElementsByValue(int value)
@@ -472,7 +460,6 @@ namespace List
             }
         }
 
-
         public void AddArrayList(ArrayList list)
         {
             if (list != null && list.Length != 0)
@@ -481,7 +468,7 @@ namespace List
                 AddArrayListByIndex(list, lastIndex);
             }
         }
-     
+
         //добавление списка в начало
 
         public void AddArrayListToStart(ArrayList list)
@@ -538,7 +525,6 @@ namespace List
             }
         }
 
-
         private void ReSize()
         {
             if (Length >= _array.Length)
@@ -554,7 +540,6 @@ namespace List
                 _array = tmpArray;
             }
         }
-
         public override bool Equals(object obj)
         {
             ArrayList list = (ArrayList)obj;
@@ -574,7 +559,6 @@ namespace List
 
             return true;
         }
-
         public override string ToString()
         {
             string result = string.Empty;
