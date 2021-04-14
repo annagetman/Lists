@@ -98,12 +98,10 @@ namespace List
             if (Length != 0)
             {
                 DNode first = new DNode(value);
-
                 _root.Previous = first;
                 first.Next = _root;
                 _root = first;
             }
-
             else
             {
                 _root = new DNode(value);
@@ -128,9 +126,7 @@ namespace List
                     else
                     {
                         DNode nodeByIndex = new DNode(value);
-
                         DNode current = GetNodeByIndex(index - 1);
-
                         nodeByIndex.Next = current.Next;
                         current.Next.Previous = nodeByIndex;
                         current.Next = nodeByIndex;
@@ -142,14 +138,12 @@ namespace List
                     _root = new DNode(value);
                     _tail = _root;
                 }
-
                 Length++;
             }
             else
             {
                 throw new IndexOutOfRangeException("Out of range!");
             }
-
         }
 
         public void RemoveLastElement()
@@ -157,23 +151,19 @@ namespace List
             if (Length > 1)
             {
                 DNode current = GetNodeByIndex(Length - 2);
-
                 current.Next = null;
                 Length--;
             }
-
             else if (Length == 1)
             {
                 Length = 0;
                 _root = null;
                 _tail = null;
             }
-
             else
             {
                 throw new NullReferenceException();
             }
-
         }
 
         public void RemoveFirst()
@@ -184,14 +174,12 @@ namespace List
 
                 Length--;
             }
-
             else if (Length == 1)
             {
                 Length = 0;
                 _root = null;
                 _tail = null;
             }
-
             else
             {
                 throw new NullReferenceException();
@@ -210,10 +198,8 @@ namespace List
 
                         current.Next = current.Next.Next;
                         current.Next.Previous = current;
-
                         Length--;
                     }
-
                     else if (index == 0)
                     {
                         RemoveFirst();
@@ -252,7 +238,6 @@ namespace List
 
                     Length -= nvalue;
                 }
-
                 else
                 {
                     throw new ArgumentException("Invalid value!");
@@ -282,20 +267,17 @@ namespace List
 
                     Length -= nvalue;
                 }
-
                 else
                 {
                     throw new ArgumentException("Invalid value!");
                 }
             }
-
             else if (nvalue == Length)
             {
                 Length = 0;
                 _root = null;
                 _tail = null;
             }
-
             else
             {
                 throw new IndexOutOfRangeException("Out of range!");
@@ -310,12 +292,10 @@ namespace List
                 {
                     RemovNElementsFromStart(nvalue);
                 }
-
                 else if (nvalue == Length - 1)
                 {
                     RemovNElementsFromLast(nvalue);
                 }
-
                 else if (nvalue > 0)
                 {
                     if (!(nvalue + index >= Length))
@@ -358,10 +338,8 @@ namespace List
                 {
                     return i;
                 }
-
                 current = current.Next;
             }
-
             return -1;
         }
 
@@ -402,7 +380,6 @@ namespace List
                         ++count;
                     }
                 }
-
                 else
                 {
                     Length = 0;
@@ -430,10 +407,8 @@ namespace List
                         maxIndex = i;
                         temp = current.Value;
                     }
-
                     current = current.Next;
                 }
-
                 return maxIndex;
             }
             else
@@ -460,7 +435,6 @@ namespace List
 
                     current = current.Next;
                 }
-
                 return minIndex;
             }
             else
@@ -471,12 +445,37 @@ namespace List
 
         public int FindValueOfMaxElem()
         {
-            return FindIndexOfMaxElem();
+            if (Length != 0)
+            {
+                int max = _root.Value;
+
+                for (int i = 0; i < Length; i++)
+                {
+                    if (GetNodeByIndex(i).Value > max)
+                    {
+                        max = GetNodeByIndex(i).Value;
+                    }
+                }
+                return max;
+            }
+            throw new ArgumentException("Length list is  zero");
         }
 
         public int FindValueOfMinElem()
         {
-            return FindIndexOfMinElem();
+            if (Length != 0)
+            {
+                int min = _root.Value;
+                for (int i = 1; i < Length; i++)
+                {
+                    if (min > GetNodeByIndex(i).Value)
+                    {
+                        min = GetNodeByIndex(i).Value;
+                    }
+                }
+                return min;
+            }
+            throw new ArgumentException("Length list is  zero");
         }
 
         public void GetSortByAscending()
@@ -697,10 +696,10 @@ namespace List
         {
             DNode current;
 
-            if (index > Length / 2 + 1) 
+            if (index > Length / 2 + 1)
             {
                 current = _tail;
-                for (int i = Length - 1; i > index; i--) 
+                for (int i = Length - 1; i > index; i--)
                 {
                     current = current.Previous;
                 }

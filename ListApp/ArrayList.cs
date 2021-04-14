@@ -72,8 +72,7 @@ namespace List
 
         public void Add(int value)
         {
-                ReSize();
-            
+            ReSize();
             _array[Length] = value;
             Length++;
         }
@@ -81,8 +80,7 @@ namespace List
         //добавление значения в начало
         public void AddToStart(int value)
         {
-                ReSize();
-           
+            ReSize();
             for (int i = Length - 1; i >= 0; i--)
             {
                 _array[i + 1] = _array[i];
@@ -122,7 +120,7 @@ namespace List
 
         public void RemoveElementFromEnd()
         {
-            if (!(Length == 0))
+            if (Length != 0)
             {
                 Length--;
             }
@@ -145,7 +143,7 @@ namespace List
 
             ReSize();
 
-            if (!(Length == 0))
+            if (Length != 0)
             {
                 Length--;
             }

@@ -38,8 +38,6 @@ namespace List
 
         public LinkedList(int[] values)
         {
-            //if(values is null)
-
             Length = values.Length;
 
             if (values.Length != 0)
