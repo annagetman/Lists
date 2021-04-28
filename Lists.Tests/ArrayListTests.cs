@@ -239,17 +239,6 @@ namespace List.Tests
             Assert.AreEqual(expected, actual);
         }
 
-        //[TestCase(1, -5, new int[] { 1, 2, 3 })]
-        ////[TestCase(0, 7, new int[] { 1, 2, 3 })]
-        //public void RemoveNElementsByIndex_WhenNElementsPassed_ReturnArgumentException(int index, int Nvalue, int[] actualArray)
-        //{
-        //    Assert.Throws<ArgumentException>(() =>
-        //    {
-        //        ArrayList actual = ArrayList.Create(actualArray);
-        //        actual.RemoveNElementsByIndex(index, Nvalue);
-        //    });
-        //}
-
         [TestCase(2, new int[] { 0, 1, 2, 3 }, 2)]
         [TestCase(1, new int[] { 0, 1, 2, 3 }, 1)]
         [TestCase(3, new int[] { 0, 1, 2, 3 }, 3)]
