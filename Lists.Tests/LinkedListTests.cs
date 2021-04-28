@@ -11,6 +11,7 @@ namespace List.Tests
         [TestCase(3, new int[] { 1, 2 }, new int[] { 1, 2, 3 })]
         [TestCase(5, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4, 5 })]
         [TestCase(1, new int[] { 1, 2, 35 }, new int[] { 1, 2, 35, 1 })]
+        [TestCase(0, new int[] { 1, 2, 35 }, new int[] { 1, 2, 35, 0 })]
         public void Add_ValueToEnd(int value, int[] actualArray, int[] expectedArray)
         {
             LinkedList actual = new LinkedList(actualArray);
@@ -25,6 +26,7 @@ namespace List.Tests
         [TestCase(3, new int[] { }, new int[] { 3 })]
         [TestCase(5, new int[] { 1, 2, 3, 4 }, new int[] { 5, 1, 2, 3, 4 })]
         [TestCase(1, new int[] { 1, 2, 35 }, new int[] { 1, 1, 2, 35, })]
+        [TestCase(0, new int[] { 1, 2, 35 }, new int[] { 0, 1, 2, 35, })]
         public void Add_ValueToStart(int value, int[] actualArray, int[] expectedArray)
         {
             LinkedList actual = new LinkedList(actualArray);
@@ -39,6 +41,7 @@ namespace List.Tests
         [TestCase(7, 0, new int[] { 1, 2, 3 }, new int[] { 7, 1, 2, 3 })]
         [TestCase(5, 1, new int[] { 1, 2, 3 }, new int[] { 1, 5, 2, 3 })]
         [TestCase(3, 2, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 3, 4 })]
+        [TestCase(8, 3, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 8, 4 })]
         public void Add_ValueByIndex(int value, int index, int[] actualArray, int[] expectedArray)
         {
             LinkedList actual = new LinkedList(actualArray);
