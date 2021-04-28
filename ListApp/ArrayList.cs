@@ -163,10 +163,10 @@ namespace List
                 {
                     RemoveElementFromStart();
                 }
-                else if (index == Length - 1)
-                {
-                    RemoveElementFromStart();
-                }
+                //else if (index == Length - 1)
+                //{
+                //    RemoveElementFromStart();
+                //}
                 else
                 {
                     Length--;

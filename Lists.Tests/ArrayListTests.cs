@@ -158,9 +158,9 @@ namespace List.Tests
         [TestCase(0, new int[] { 7, 1, 2, 3 }, new int[] { 1, 2, 3 })]
         [TestCase(1, new int[] { 1, 6, 2, 3 }, new int[] { 1, 2, 3 })]
         [TestCase(2, new int[] { 1, 2, 5, 3, }, new int[] { 1, 2, 3 })]
-        //[TestCase(3, new int[] { 1, 2, 3, 5 }, new int[] { 1, 2, 3 })]
+        [TestCase(3, new int[] { 1, 2, 3, 5 }, new int[] { 1, 2, 3 })]
         [TestCase(2, new int[] { 1, 2, 55, 3, }, new int[] { 1, 2, 3 })]
-        public void Remove_ElementByIndex(int index, int[] actualArray, int[] expectedArray)
+        public void Remove_ElementByIndex_WhenMethodCalledPassed_Remove_ElementByIndex(int index, int[] actualArray, int[] expectedArray)
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);

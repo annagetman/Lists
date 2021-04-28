@@ -409,26 +409,50 @@ namespace List
         {
             if (Length != 0)
             {
-                int min = _root.Value;
+                Node current = _root;
+                int maxValue = current.Value;
 
                 for (int i = 0; i < Length; i++)
                 {
-                    if (GetNodeByIndex(i).Value < min)
+                    if (current.Value > maxValue)
                     {
-                        min = GetNodeByIndex(i).Value;
+                        maxValue = current.Value;
                     }
+
+                    current = current.Next;
                 }
-                return min;
+
+                return maxValue;
             }
             else
             {
-                throw new ArgumentException("Length is 0 , no elements");
+                throw new NullReferenceException();
             }
         }
 
         public int FindValueOfMinElem()
         {
-            return FindIndexOfMinElem();
+            if (Length != 0)
+            {
+                Node current = _root;
+                int minValue = current.Value;
+
+                for (int i = 0; i < Length; i++)
+                {
+                    if (current.Value < minValue)
+                    {
+                        minValue = current.Value;
+                    }
+
+                    current = current.Next;
+                }
+
+                return minValue;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public void GetSortByAscending()

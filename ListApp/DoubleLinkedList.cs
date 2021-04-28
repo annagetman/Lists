@@ -449,9 +449,9 @@ namespace List
             {
                 int max = _root.Value;
 
-                for (int i = 0; i < Length; i++)
+                for (int i = 1; i < Length; i++)
                 {
-                    if (GetNodeByIndex(i).Value > max)
+                    if (max < GetNodeByIndex(i).Value)
                     {
                         max = GetNodeByIndex(i).Value;
                     }
