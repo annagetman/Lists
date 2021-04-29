@@ -13,7 +13,6 @@ namespace List
             {
                 return GetNodeByIndex(index).Value;
             }
-
             set
             {
                 GetNodeByIndex(index).Value = value;
@@ -52,13 +51,11 @@ namespace List
                     _tail = _tail.Next;
                 }
             }
-
             else
             {
                 _root = null;
                 _tail = null;
             }
-
         }
 
         public static DoubleLinkedList Create(int[] values)
@@ -67,12 +64,8 @@ namespace List
             {
                 return new DoubleLinkedList(values);
             }
-
             throw new NullReferenceException("Values is null");
         }
-
-
-
 
         public void Add(int value)
         {
@@ -82,19 +75,16 @@ namespace List
                 _tail.Next.Previous = _tail;
                 _tail = _tail.Next;
             }
-
             else
             {
                 _root = new DNode(value);
                 _tail = _root;
             }
-
             Length++;
         }
 
         public void AddValueToStart(int value)
         {
-
             if (Length != 0)
             {
                 DNode first = new DNode(value);
@@ -107,9 +97,7 @@ namespace List
                 _root = new DNode(value);
                 _tail = _root;
             }
-
             Length++;
-
         }
 
         public void AddValueByIndex(int value, int index)
@@ -204,14 +192,11 @@ namespace List
                     {
                         RemoveFirst();
                     }
-
                     else
                     {
                         RemoveLastElement();
                     }
-
                 }
-
                 else
                 {
                     Length = 0;
@@ -219,7 +204,6 @@ namespace List
                     _tail = null;
                 }
             }
-
             else
             {
                 throw new IndexOutOfRangeException("Error");
@@ -249,7 +233,6 @@ namespace List
                 _root = null;
                 _tail = null;
             }
-
             else
             {
                 throw new IndexOutOfRangeException("Out of range!");
@@ -357,7 +340,7 @@ namespace List
             }
         }
 
-        public void Revers()
+        public void Reverse()
         {
             if (!(this is null))
             {
@@ -373,7 +356,6 @@ namespace List
                         value = current.Value;
                         current.Value = tmp.Value;
                         tmp.Value = value;
-
                         current = current.Next;
                         tmp = tmp.Previous;
 
@@ -432,7 +414,6 @@ namespace List
                         minIndex = i;
                         temp = current.Value;
                     }
-
                     current = current.Next;
                 }
                 return minIndex;
@@ -491,7 +472,6 @@ namespace List
                         min = j;
                     }
                 }
-
                 int temp = GetNodeByIndex(i).Value;
                 GetNodeByIndex(i).Value = GetNodeByIndex(min).Value;
                 GetNodeByIndex(min).Value = temp;
@@ -511,7 +491,6 @@ namespace List
                         max = j;
                     }
                 }
-
                 int temp = GetNodeByIndex(i).Value;
                 GetNodeByIndex(i).Value = GetNodeByIndex(max).Value;
                 GetNodeByIndex(max).Value = temp;
@@ -550,15 +529,12 @@ namespace List
                     _tail = secondList._tail;
 
                     Length += secondList.Length;
-
                 }
-
                 else
                 {
                     throw new ArgumentException("No elements in list!");
                 }
             }
-
             else
             {
                 _root = secondList._root;
@@ -580,18 +556,15 @@ namespace List
 
                     Length += secondList.Length;
                 }
-
                 else
                 {
                     throw new ArgumentException("No elements in list!");
                 }
             }
-
             else
             {
                 _root = secondList._root;
                 _tail = secondList._tail;
-
                 Length = secondList.Length;
             }
         }
@@ -608,35 +581,28 @@ namespace List
                         {
                             AddListToStart(secondList);
                         }
-
                         else
                         {
                             DNode current = GetNodeByIndex(index - 1);
-
                             secondList._tail.Next = current.Next;
                             current.Next.Previous = secondList._tail;
                             current.Next = secondList._root;
                             secondList._root.Previous = current;
-
                             Length += secondList.Length;
                         }
                     }
-
                     else
                     {
                         _root = secondList._root;
                         _tail = secondList._tail;
-
                         Length = secondList.Length;
                     }
                 }
-
                 else
                 {
                     throw new IndexOutOfRangeException("Out of range!");
                 }
             }
-
             else
             {
                 throw new ArgumentException("No elements in list!");
@@ -654,7 +620,6 @@ namespace List
                     current = current.Next;
                     s += current.Value + " ";
                 }
-
                 return s;
             }
             else
@@ -685,17 +650,14 @@ namespace List
                         currentList = currentList.Next;
                     }
                 }
-
                 return isEqual;
             }
-
             throw new ArgumentException("obj is not List");
         }
 
         private DNode GetNodeByIndex(int index)
         {
             DNode current;
-
             if (index > Length / 2 + 1)
             {
                 current = _tail;
@@ -705,7 +667,6 @@ namespace List
                 }
                 return current;
             }
-
             else
             {
                 current = _root;
@@ -716,6 +677,5 @@ namespace List
                 return current;
             }
         }
-
     }
 }

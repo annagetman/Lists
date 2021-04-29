@@ -85,9 +85,7 @@ namespace List
             {
                 _array[i + 1] = _array[i];
             }
-
             _array[0] = value;
-
             ++Length;
         }
 
@@ -101,12 +99,10 @@ namespace List
                 {
                     ReSize();
                 }
-
                 for (int i = Length - 1; i >= index; i--)
                 {
                     _array[i + 1] = _array[i];
                 }
-
                 _array[index] = value;
                 ++Length;
             }
@@ -128,9 +124,7 @@ namespace List
             {
                 throw new IndexOutOfRangeException();
             }
-
             ReSize();
-
         }
 
         //удаление из начала одного элемента
@@ -147,7 +141,6 @@ namespace List
             {
                 Length--;
             }
-
             else
             {
                 throw new IndexOutOfRangeException();
@@ -163,10 +156,6 @@ namespace List
                 {
                     RemoveElementFromStart();
                 }
-                //else if (index == Length - 1)
-                //{
-                //    RemoveElementFromStart();
-                //}
                 else
                 {
                     Length--;
@@ -187,13 +176,13 @@ namespace List
         }
 
         //удаление из конца N элементов
-        public void RemoveNElementsFromEnd(int Nvalue)
+        public void RemoveNElementsFromEnd(int nvalue)
         {
-            if (Nvalue < Length)
+            if (nvalue < Length)
             {
-                if (!(Nvalue < 0))
+                if (!(nvalue < 0))
                 {
-                    Length -= Nvalue;
+                    Length -= nvalue;
                     ReSize();
                 }
                 else
@@ -202,7 +191,7 @@ namespace List
                 }
             }
 
-            else if (Nvalue == Length)
+            else if (nvalue == Length)
             {
                 Length = 0;
                 _array = new int[10];
@@ -215,28 +204,26 @@ namespace List
         }
 
         //удаление из начала N элементов
-        public void RemoveNElementsFromStart(int Nvalue)
+        public void RemoveNElementsFromStart(int nvalue)
         {
-            if (Nvalue < Length)
+            if (nvalue < Length)
             {
-                if (!(Nvalue < 0))
+                if (!(nvalue < 0))
                 {
-                    for (int i = Nvalue; i < Length; i++)
+                    for (int i = nvalue; i < Length; i++)
                     {
-                        _array[i - Nvalue] = _array[i];
+                        _array[i - nvalue] = _array[i];
                     }
 
-                    Length -= Nvalue;
+                    Length -= nvalue;
                     ReSize();
                 }
-
                 else
                 {
                     throw new ArgumentException("Invalid value");
                 }
             }
-
-            else if (Nvalue == Length)
+            else if (nvalue == Length)
             {
                 Length = 0;
                 _array = new int[10];
@@ -265,10 +252,8 @@ namespace List
                             _array[i] = _array[i + Nvalue];
                         }
                     }
-
                     Length -= Nvalue;
                 }
-
                 ReSize();
             }
             else if (Nvalue < 0)
@@ -294,9 +279,7 @@ namespace List
                     }
                 }
             }
-
             return -1;
-
         }
 
         //реверс(123 -> 321)
@@ -330,7 +313,6 @@ namespace List
                         maxIndexOfElement = i;
                     }
                 }
-
                 return maxIndexOfElement;
             }
             else
@@ -345,7 +327,6 @@ namespace List
         {
             if (!(Length == 0))
             {
-
                 int minIndexOfElement = 0;
 
                 for (int i = 1; i < Length; i++)
@@ -355,7 +336,6 @@ namespace List
                         minIndexOfElement = i;
                     }
                 }
-
                 return minIndexOfElement;
             }
             else
@@ -367,7 +347,6 @@ namespace List
         //поиск значения максимального элемента
         public int SearchValueMaxElement()
         {
-
             return _array[SearchIndexMaxElement()];
         }
 
@@ -375,7 +354,6 @@ namespace List
         public int SearchValueMinElement()
         {
             return _array[SearchIndexMinElement()];
-
         }
 
         //сортировка по возрастанию
@@ -394,7 +372,6 @@ namespace List
                     _array[j] = _array[j - 1];
                     j--;
                 }
-
                 _array[j] = temp;
             }
         }
@@ -415,7 +392,6 @@ namespace List
                     _array[j] = _array[j - 1];
                     j--;
                 }
-
                 _array[j] = temp;
             }
         }
@@ -497,13 +473,11 @@ namespace List
                         }
                     }
                 }
-
                 else
                 {
                     throw new IndexOutOfRangeException();
                 }
             }
-
             else
             {
                 throw new ArgumentException("List no contains elements");
@@ -521,7 +495,6 @@ namespace List
                 {
                     tmpArray[i] = _array[i];
                 }
-
                 _array = tmpArray;
             }
         }
@@ -534,7 +507,6 @@ namespace List
             ArrayList list = (ArrayList)obj;
             if (this.Length != list.Length)
             {
-
                 return false;
             }
 
@@ -545,7 +517,6 @@ namespace List
                     return false;
                 }
             }
-
             return true;
         }
         public override string ToString()
@@ -563,7 +534,6 @@ namespace List
                     result.Append(_array[i] + " ");
                 }
             }
-
             return result.ToString();
         }
     }

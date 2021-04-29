@@ -149,7 +149,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.Revers();
+            actual.Reverse();
 
             Assert.AreEqual(expected, actual);
         }
