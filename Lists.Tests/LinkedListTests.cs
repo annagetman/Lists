@@ -54,7 +54,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemoveLastElement();
+            actual.RemoveElementFromEnd();
 
             Assert.AreEqual(expected, actual);
         }
@@ -67,7 +67,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemoveFirst();
+            actual.RemoveElementFromStart();
 
             Assert.AreEqual(expected, actual);
         }
@@ -80,7 +80,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemoveByIndex(index);
+            actual.RemoveElementByIndex(index);
 
             Assert.AreEqual(expected, actual);
         }
@@ -94,7 +94,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemovNElementsFromLast(Nvalue);
+            actual.RemoveNElementsFromEnd(Nvalue);
 
             Assert.AreEqual(expected, actual);
         }
@@ -113,7 +113,6 @@ namespace List.Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(1, 0, new int[] { 1, 2, 3 }, new int[] { 2, 3 })]
         [TestCase(1, 3, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3 })]
         [TestCase(2, 2, new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 5 })]
         [TestCase(3, 0, new int[] { 1, 2, 3 }, new int[] { })]
@@ -123,7 +122,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemoveByIndexNElements(nvalue, index);
+            actual.RemoveNElementsByIndex(nvalue, index);
 
             Assert.AreEqual(expected, actual);
         }
@@ -135,7 +134,7 @@ namespace List.Tests
         {
             LinkedList array = new LinkedList(actualArray);
 
-            int actual = array.GetIndexByValue(value);
+            int actual = array.SearchFirstIndexByValue(value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -160,7 +159,7 @@ namespace List.Tests
         public void FindMaxIndex_WhenMethodCalled_ReturnMaxIndex(int[] actualArray, int expected)
         {
             LinkedList index = new LinkedList(actualArray);
-            int actual = index.FindIndexOfMaxElem();
+            int actual = index.SearchIndexMaxElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -171,7 +170,7 @@ namespace List.Tests
             Assert.Throws<ArgumentException>(() =>
             {
                 LinkedList list = new LinkedList(actualArray);
-                int actual = list.FindIndexOfMaxElem();
+                int actual = list.SearchIndexMaxElement();
             });
         }
 
@@ -181,7 +180,7 @@ namespace List.Tests
         public void FindMinIndex_WhenMethodCalled_ReturnMinIndex(int[] actualArray, int expected)
         {
             LinkedList index = new LinkedList(actualArray);
-            int actual = index.FindIndexOfMinElem();
+            int actual = index.SearchIndexMinElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -192,7 +191,7 @@ namespace List.Tests
             Assert.Throws<ArgumentException>(() =>
             {
                 LinkedList list = new LinkedList(actualArray);
-                int actual = list.FindIndexOfMinElem();
+                int actual = list.SearchIndexMinElement();
             });
         }
 
@@ -202,7 +201,7 @@ namespace List.Tests
         public void FindValueOfMaxElem_WhenMethodCalled_ReturnMaxIndex(int[] actualArray, int expected)
         {
             LinkedList index = new LinkedList(actualArray);
-            int actual = index.FindValueOfMaxElem();
+            int actual = index.SearchValueMaxElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -213,7 +212,7 @@ namespace List.Tests
         public void FindValueOfMinElem_WhenMethodCalled_ReturnValueOfMinElem(int[] actualArray, int expected)
         {
             LinkedList index = new LinkedList(actualArray);
-            int actual = index.FindValueOfMinElem();
+            int actual = index.SearchValueMinElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -226,7 +225,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.GetSortByAscending();
+            actual.SortAscending();
 
             Assert.AreEqual(expected, actual);
         }
@@ -240,7 +239,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.GetDescendingSort();
+            actual.DescendingSort();
 
             Assert.AreEqual(expected, actual);
         }
@@ -254,7 +253,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemoveByValueFirst(value);
+            actual.RemoveElementByValue(value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -268,7 +267,7 @@ namespace List.Tests
             LinkedList actual = new LinkedList(actualArray);
             LinkedList expected = new LinkedList(expectedArray);
 
-            actual.RemoveByValueAll(value);
+            actual.RemoveAllElementsByValue(value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -284,7 +283,7 @@ namespace List.Tests
             LinkedList list = new LinkedList(arrayForList);
             LinkedList expectedArrayList = new LinkedList(expectedArray);
 
-            actual.AddListByIndex(list, index);
+            actual.AddLinkedListByIndex(list, index);
 
             Assert.AreEqual(expectedArrayList, actual);
         }
@@ -296,7 +295,7 @@ namespace List.Tests
             {
                 LinkedList actual = new LinkedList(actualArray);
                 LinkedList list = new LinkedList(arrayForList);
-                actual.AddListToTheEnd(list);
+                actual.AddArrayList(list);
             });
         }
 
@@ -309,7 +308,7 @@ namespace List.Tests
             LinkedList list = new LinkedList(arrayForList);
             LinkedList expectedArrayList = new LinkedList(expectedArray);
 
-            actual.AddListToStart(list);
+            actual.AddLinkedListToStart(list);
 
             Assert.AreEqual(expectedArrayList, actual);
         }

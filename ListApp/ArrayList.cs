@@ -9,6 +9,17 @@ namespace List
 
         public int Length { get; private set; }
 
+        private ArrayList(int[] array)
+        {
+            Length = array.Length;
+
+            _array = new int[Length];
+
+            for (int i = 0; i < Length; i++)
+            {
+                _array[i] = array[i];
+            }
+        }
         public int this[int index]
         {
             get
@@ -48,18 +59,6 @@ namespace List
             _array[0] = value;
         }
 
-        private ArrayList(int[] array)
-        {
-            Length = array.Length;
-
-            _array = new int[Length];
-
-            for (int i = 0; i < Length; i++)
-            {
-                _array[i] = array[i];
-            }
-        }
-
         public static ArrayList Create(int[] values)
         {
             if (!(values is null))
@@ -78,7 +77,7 @@ namespace List
         }
 
         //добавление значения в начало
-        public void AddToStart(int value)
+        public void AddValueToStart(int value)
         {
             ReSize();
             for (int i = Length - 1; i >= 0; i--)
@@ -283,7 +282,7 @@ namespace List
         }
 
         //реверс(123 -> 321)
-        public void ReverseArray()
+        public void Reverse()
         {
             int temp;
             int swapIndex;
@@ -325,7 +324,7 @@ namespace List
 
         public int SearchIndexMinElement()
         {
-            if (!(Length == 0))
+            if (Length != 0)
             {
                 int minIndexOfElement = 0;
 

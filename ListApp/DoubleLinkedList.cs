@@ -6,35 +6,10 @@ namespace List
 {
     public class DoubleLinkedList
     {
-        public int Length { get; private set; }
-        public int this[int index]
-        {
-            get
-            {
-                return GetNodeByIndex(index).Value;
-            }
-            set
-            {
-                GetNodeByIndex(index).Value = value;
-            }
-        }
-
         private DNode _root;
         private DNode _tail;
 
-        public DoubleLinkedList()
-        {
-            Length = 0;
-            _root = null;
-            _tail = null;
-        }
-        public DoubleLinkedList(int value)
-        {
-            Length = 1;
-            _root = new DNode(value);
-            _tail = _root;
-        }
-
+        public int Length { get; private set; }
         private DoubleLinkedList(int[] values)
         {
             Length = values.Length;
@@ -57,6 +32,55 @@ namespace List
                 _tail = null;
             }
         }
+
+        private DNode GetNodeByIndex(int index)
+        {
+            DNode current;
+            if (index > Length / 2 + 1)
+            {
+                current = _tail;
+                for (int i = Length - 1; i > index; i--)
+                {
+                    current = current.Previous;
+                }
+                return current;
+            }
+            else
+            {
+                current = _root;
+                for (int i = 1; i <= index; i++)
+                {
+                    current = current.Next;
+                }
+                return current;
+            }
+        }
+
+        public int this[int index]
+        {
+            get
+            {
+                return GetNodeByIndex(index).Value;
+            }
+            set
+            {
+                GetNodeByIndex(index).Value = value;
+            }
+        }
+
+        public DoubleLinkedList()
+        {
+            Length = 0;
+            _root = null;
+            _tail = null;
+        }
+        public DoubleLinkedList(int value)
+        {
+            Length = 1;
+            _root = new DNode(value);
+            _tail = _root;
+        }
+
 
         public static DoubleLinkedList Create(int[] values)
         {
@@ -134,7 +158,7 @@ namespace List
             }
         }
 
-        public void RemoveLastElement()
+        public void RemoveElementFromEnd()
         {
             if (Length > 1)
             {
@@ -154,7 +178,7 @@ namespace List
             }
         }
 
-        public void RemoveFirst()
+        public void RemoveElementFromStart()
         {
             if (Length > 1)
             {
@@ -174,7 +198,7 @@ namespace List
             }
         }
 
-        public void RemoveByIndex(int index)
+        public void RemoveElementByIndex(int index)
         {
             if (index >= 0 && index <= Length)
             {
@@ -190,11 +214,11 @@ namespace List
                     }
                     else if (index == 0)
                     {
-                        RemoveFirst();
+                        RemoveElementFromStart();
                     }
                     else
                     {
-                        RemoveLastElement();
+                        RemoveElementFromEnd();
                     }
                 }
                 else
@@ -210,7 +234,7 @@ namespace List
             }
         }
 
-        public void RemovNElementsFromLast(int nvalue)
+        public void RemoveNElementsFromEnd(int nvalue)
         {
             if (nvalue < Length)
             {
@@ -267,7 +291,7 @@ namespace List
             }
         }
 
-        public void RemoveByIndexNElements(int nvalue, int index)
+        public void RemoveNElementsByIndex(int nvalue, int index)
         {
             if (index >= 0 && index < Length)
             {
@@ -277,7 +301,7 @@ namespace List
                 }
                 else if (nvalue == Length - 1)
                 {
-                    RemovNElementsFromLast(nvalue);
+                    RemoveNElementsFromEnd(nvalue);
                 }
                 else if (nvalue > 0)
                 {
@@ -311,7 +335,7 @@ namespace List
             }
         }
 
-        public int GetIndexByValue(int value)
+        public int SearchFirstIndexByValue(int value)
         {
             DNode current = _root;
 
@@ -324,20 +348,6 @@ namespace List
                 current = current.Next;
             }
             return -1;
-        }
-
-        public void GetChangeByIndex(int index, int value)
-        {
-            if (index >= 0 && index <= Length)
-            {
-                DNode current = GetNodeByIndex(index);
-
-                current.Value = value;
-            }
-            else
-            {
-                throw new IndexOutOfRangeException("Out of range!");
-            }
         }
 
         public void Reverse()
@@ -374,7 +384,7 @@ namespace List
                 throw new NullReferenceException("Error, null");
             }
         }
-        public int FindIndexOfMaxElem()
+        public int SearchIndexMaxElement()
         {
             if (Length != 0 || this is null)
             {
@@ -424,7 +434,7 @@ namespace List
             }
         }
 
-        public int FindValueOfMaxElem()
+        public int SearchValueMaxElement()
         {
             if (Length != 0)
             {
@@ -442,7 +452,7 @@ namespace List
             throw new ArgumentException("Length list is  zero");
         }
 
-        public int FindValueOfMinElem()
+        public int SearchValueMinElement()
         {
             if (Length != 0)
             {
@@ -459,7 +469,7 @@ namespace List
             throw new ArgumentException("Length list is  zero");
         }
 
-        public void GetSortByAscending()
+        public void SortAscending()
         {
             for (int i = 0; i < Length; i++)
             {
@@ -478,7 +488,7 @@ namespace List
             }
         }
 
-        public void GetDescendingSort()
+        public void DescendingSort()
         {
             for (int i = 0; i < Length; i++)
             {
@@ -497,28 +507,28 @@ namespace List
             }
         }
 
-        public void RemoveByValueFirst(int value)
+        public void RemoveElementByValue(int value)
         {
-            int index = GetIndexByValue(value);
+            int index = SearchFirstIndexByValue(value);
 
             if (!(value == -1))
             {
-                RemoveByIndex(index);
+                RemoveElementByIndex(index);
             }
         }
 
-        public void RemoveByValueAll(int value)
+        public void RemoveAllElementsByValue(int value)
         {
-            int indexOfElements = GetIndexByValue(value);
+            int indexOfElements = SearchFirstIndexByValue(value);
 
             while (indexOfElements != -1)
             {
-                RemoveByIndex(indexOfElements);
-                indexOfElements = GetIndexByValue(value);
+                RemoveElementByIndex(indexOfElements);
+                indexOfElements = SearchFirstIndexByValue(value);
             }
         }
 
-        public void AddListToTheEnd(DoubleLinkedList secondList)
+        public void AddArrayList(DoubleLinkedList secondList)
         {
             if (Length != 0)
             {
@@ -544,7 +554,7 @@ namespace List
             }
         }
 
-        public void AddListToStart(DoubleLinkedList secondList)
+        public void AddDoubleLinkedListToStart(DoubleLinkedList secondList)
         {
             if (Length != 0)
             {
@@ -569,7 +579,7 @@ namespace List
             }
         }
 
-        public void AddListByIndex(DoubleLinkedList secondList, int index)
+        public void AddDoubleLinkedListByIndex(DoubleLinkedList secondList, int index)
         {
             if (secondList.Length != 0)
             {
@@ -579,7 +589,7 @@ namespace List
                     {
                         if (index == 0)
                         {
-                            AddListToStart(secondList);
+                            AddDoubleLinkedListToStart(secondList);
                         }
                         else
                         {
@@ -653,29 +663,6 @@ namespace List
                 return isEqual;
             }
             throw new ArgumentException("obj is not List");
-        }
-
-        private DNode GetNodeByIndex(int index)
-        {
-            DNode current;
-            if (index > Length / 2 + 1)
-            {
-                current = _tail;
-                for (int i = Length - 1; i > index; i--)
-                {
-                    current = current.Previous;
-                }
-                return current;
-            }
-            else
-            {
-                current = _root;
-                for (int i = 1; i <= index; i++)
-                {
-                    current = current.Next;
-                }
-                return current;
-            }
         }
     }
 }

@@ -69,7 +69,7 @@ namespace List.Tests
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
 
-            actual.AddToStart(value);
+            actual.AddValueToStart(value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -262,7 +262,7 @@ namespace List.Tests
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
 
-            actual.ReverseArray();
+            actual.Reverse();
 
             Assert.AreEqual(expected, actual);
         }

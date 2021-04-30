@@ -6,6 +6,9 @@ namespace List
 {
     public class LinkedList
     {
+        private Node _root;
+        private Node _tail;
+
         public int Length { get; private set; }
         public int this[int index]
         {
@@ -18,9 +21,6 @@ namespace List
                 GetNodeByIndex(index).Value = value;
             }
         }
-
-        private Node _root;
-        private Node _tail;
 
         public LinkedList()
         {
@@ -124,18 +124,18 @@ namespace List
             }
         }
 
-        public void RemoveLastElement()
+        public void RemoveElementFromEnd()
         {
-            RemoveByIndex(Length - 1);
+            RemoveElementByIndex(Length - 1);
         }
 
-        public void RemoveFirst()
+        public void RemoveElementFromStart()
         {
             _root = _root.Next;
             Length--;
         }
 
-        public void RemoveByIndex(int index)
+        public void RemoveElementByIndex(int index)
         {
             if (index >= 0 && index <= Length)
             {
@@ -156,7 +156,7 @@ namespace List
                     }
                     else
                     {
-                        RemoveFirst();
+                        RemoveElementFromStart();
                     }
                 }
                 else
@@ -172,11 +172,11 @@ namespace List
             }
         }
 
-        public void RemovNElementsFromLast(int nvalue)
+        public void RemoveNElementsFromEnd(int nvalue)
         {
             if (nvalue < Length)
             {
-                if (!(nvalue < 0))
+                if (nvalue !< 0)
                 {
                     Node current = GetNodeByIndex(Length - nvalue);
                     current.Next = _tail;
@@ -228,7 +228,7 @@ namespace List
             }
         }
 
-        public void RemoveByIndexNElements(int nvalue, int index)
+        public void RemoveNElementsByIndex(int nvalue, int index)
         {
             if (index >= 0 && index < Length)
             {
@@ -238,7 +238,7 @@ namespace List
                 }
                 else if (nvalue == Length - 1)
                 {
-                    RemovNElementsFromLast(nvalue);
+                    RemoveNElementsFromEnd(nvalue);
                 }
                 else if (nvalue > 0)
                 {
@@ -270,7 +270,7 @@ namespace List
             }
         }
 
-        public int GetIndexByValue(int value)
+        public int SearchFirstIndexByValue(int value)
         {
             Node current = _root;
 
@@ -284,20 +284,6 @@ namespace List
                 current = current.Next;
             }
             return -1;
-        }
-
-        public void GetChangeByIndex(int index, int value)
-        {
-            if (index >= 0 && index <= Length)
-            {
-                Node current = GetNodeByIndex(index);
-
-                current.Value = value;
-            }
-            else
-            {
-                throw new IndexOutOfRangeException("Out of range!");
-            }
         }
 
         public void Reverse()
@@ -333,7 +319,7 @@ namespace List
             }
         }
 
-        public int FindIndexOfMaxElem()
+        public int SearchIndexMaxElement()
         {
             if (Length != 0 || this is null)
             {
@@ -358,7 +344,7 @@ namespace List
             }
         }
 
-        public int FindIndexOfMinElem()
+        public int SearchIndexMinElement()
         {
             if (Length != 0 || this is null)
             {
@@ -384,7 +370,7 @@ namespace List
             }
         }
 
-        public int FindValueOfMaxElem()
+        public int SearchValueMaxElement()
         {
             if (Length != 0)
             {
@@ -408,7 +394,7 @@ namespace List
             }
         }
 
-        public int FindValueOfMinElem()
+        public int SearchValueMinElement()
         {
             if (Length != 0)
             {
@@ -431,7 +417,7 @@ namespace List
             }
         }
 
-        public void GetSortByAscending()
+        public void SortAscending()
         {
             for (int i = 0; i < Length; i++)
             {
@@ -450,7 +436,7 @@ namespace List
             }
         }
 
-        public void GetDescendingSort()
+        public void DescendingSort()
         {
             for (int i = 0; i < Length; i++)
             {
@@ -468,28 +454,28 @@ namespace List
             }
         }
 
-        public void RemoveByValueFirst(int value)
+        public void RemoveElementByValue(int value)
         {
-            int index = GetIndexByValue(value);
+            int index = SearchFirstIndexByValue(value);
 
             if (value != -1)
             {
-                RemoveByIndex(index);
+                RemoveElementByIndex(index);
             }
         }
 
-        public void RemoveByValueAll(int value)
+        public void RemoveAllElementsByValue(int value)
         {
-            int indexOfElements = GetIndexByValue(value);
+            int indexOfElements = SearchFirstIndexByValue(value);
 
             while (indexOfElements != -1)
             {
-                RemoveByIndex(indexOfElements);
-                indexOfElements = GetIndexByValue(value);
+                RemoveElementByIndex(indexOfElements);
+                indexOfElements = SearchFirstIndexByValue(value);
             }
         }
 
-        public void AddListToTheEnd(LinkedList secondList)
+        public void AddArrayList(LinkedList secondList)
         {
             if (Length != 0)
             {
@@ -511,7 +497,7 @@ namespace List
             }
         }
 
-        public void AddListToStart(LinkedList secondList)
+        public void AddLinkedListToStart(LinkedList secondList)
         {
             if (Length != 0)
             {
@@ -535,7 +521,7 @@ namespace List
             }
         }
 
-        public void AddListByIndex(LinkedList secondList, int index)
+        public void AddLinkedListByIndex(LinkedList secondList, int index)
         {
             if (secondList.Length != 0)
             {
@@ -545,7 +531,7 @@ namespace List
                     {
                         if (index == 0)
                         {
-                            AddListToStart(secondList);
+                            AddLinkedListToStart(secondList);
                         }
                         else
                         {

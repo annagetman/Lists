@@ -105,7 +105,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemoveLastElement();
+            actual.RemoveElementFromEnd();
 
             Assert.AreEqual(expected, actual);
         }
@@ -117,7 +117,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemoveLastElement();
+                actual.RemoveElementFromEnd();
             });
         }
 
@@ -129,7 +129,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemoveFirst();
+            actual.RemoveElementFromStart();
 
             Assert.AreEqual(expected, actual);
         }
@@ -141,7 +141,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemoveFirst();
+                actual.RemoveElementFromStart();
             });
         }
 
@@ -154,7 +154,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemoveByIndex(index);
+            actual.RemoveElementByIndex(index);
 
             Assert.AreEqual(expected, actual);
         }
@@ -167,7 +167,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemoveByIndex(index);
+                actual.RemoveElementByIndex(index);
             });
         }
 
@@ -180,7 +180,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemovNElementsFromLast(nvalue);
+            actual.RemoveNElementsFromEnd(nvalue);
 
             Assert.AreEqual(expected, actual);
         }
@@ -192,7 +192,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemovNElementsFromLast(nElements);
+                actual.RemoveNElementsFromEnd(nElements);
             });
         }
 
@@ -203,7 +203,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemovNElementsFromLast(nElements);
+                actual.RemoveNElementsFromEnd(nElements);
             });
         }
 
@@ -239,7 +239,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemovNElementsFromLast(nElements);
+                actual.RemoveNElementsFromEnd(nElements);
             });
         }
 
@@ -252,7 +252,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemoveByIndexNElements(nvalue, index);
+            actual.RemoveNElementsByIndex(nvalue, index);
 
             Assert.AreEqual(expected, actual);
         }
@@ -264,7 +264,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemoveByIndexNElements(nElements, index);
+                actual.RemoveNElementsByIndex(nElements, index);
             });
         }
 
@@ -275,7 +275,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
 
-                actual.RemoveByIndexNElements(nElements, index);
+                actual.RemoveNElementsByIndex(nElements, index);
             });
         }
 
@@ -286,34 +286,9 @@ namespace List.Tests
         public void GetIndexByValue_WhenValue_ReturnIndex(int value, int[] actualArray, int expected)
         {
             DoubleLinkedList index = DoubleLinkedList.Create(actualArray);
-            int actual = index.GetIndexByValue(value);
+            int actual = index.SearchFirstIndexByValue(value);
 
             Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase(2, 2, new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, new int[] { 1, 2, 2, 4, 5, 6, 7, 8 })]
-        [TestCase(10, 0, new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, new int[] { 10, 2, 3, 4, 5, 6, 7, 8 })]
-        [TestCase(1, 7, new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, new int[] { 1, 2, 3, 4, 5, 6, 7, 1 })]
-
-        public void GetChangeByIndex_WhenValue_ReturnIndex(int value, int index, int[] actualArray, int[] expectedArray)
-        {
-            DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
-            DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
-
-            actual.GetChangeByIndex(index, value);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase(new int[] { 0, 4, 7 }, 5, 13)]
-        public void GetChangeByIndex_WhenIndexAndNElements_ReturnIndexOutOfRangeException(int[] actualArray, int index, int value)
-        {
-            Assert.Throws<IndexOutOfRangeException>(() =>
-            {
-                DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
-
-                actual.GetChangeByIndex(index, value);
-            });
         }
 
         [TestCase(new int[] { 1, 2, 3, 4, 5 }, new int[] { 5, 4, 3, 2, 1 })]
@@ -336,7 +311,7 @@ namespace List.Tests
         public void FindMaxIndex_WhenMethodCalledMaxIndex_ReturnMaxIndex(int[] actualArray, int expected)
         {
             DoubleLinkedList index = DoubleLinkedList.Create(actualArray);
-            int actual = index.FindIndexOfMaxElem();
+            int actual = index.SearchIndexMaxElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -347,7 +322,7 @@ namespace List.Tests
             Assert.Throws<ArgumentException>(() =>
             {
                 DoubleLinkedList list = DoubleLinkedList.Create(actualArray);
-                int actual = list.FindIndexOfMaxElem();
+                int actual = list.SearchIndexMaxElement();
             });
         }
 
@@ -378,7 +353,7 @@ namespace List.Tests
         public void FindValueOfMaxElem_WhenMethodCalledMaxElem_ReturnMaxIndex(int[] actualArray, int expected)
         {
             DoubleLinkedList index = DoubleLinkedList.Create(actualArray);
-            int actual = index.FindValueOfMaxElem();
+            int actual = index.SearchValueMaxElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -389,7 +364,7 @@ namespace List.Tests
         public void FindValueOfMinElem_WhenMethodCalledMinElem_ReturnValueOfMinElem(int[] actualArray, int expected)
         {
             DoubleLinkedList index = DoubleLinkedList.Create(actualArray);
-            int actual = index.FindValueOfMinElem();
+            int actual = index.SearchValueMinElement();
 
             Assert.AreEqual(expected, actual);
         }
@@ -401,7 +376,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.GetSortByAscending();
+            actual.SortAscending();
 
             Assert.AreEqual(expected, actual);
         }
@@ -413,7 +388,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.GetDescendingSort();
+            actual.DescendingSort();
 
             Assert.AreEqual(expected, actual);
         }
@@ -427,7 +402,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemoveByValueFirst(value);
+            actual.RemoveElementByValue(value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -441,7 +416,7 @@ namespace List.Tests
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
 
-            actual.RemoveByValueAll(value);
+            actual.RemoveAllElementsByValue(value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -455,7 +430,7 @@ namespace List.Tests
             DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
             DoubleLinkedList expectedArrayList = DoubleLinkedList.Create(expectedArray);
 
-            actual.AddListToTheEnd(list);
+            actual.AddArrayList(list);
 
             Assert.AreEqual(expectedArrayList, actual);
         }
@@ -467,7 +442,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
                 DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
-                actual.AddListToTheEnd(list);
+                actual.AddArrayList(list);
             });
         }
 
@@ -480,7 +455,7 @@ namespace List.Tests
             DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
             DoubleLinkedList expectedArrayList = DoubleLinkedList.Create(expectedArray);
 
-            actual.AddListToStart(list);
+            actual.AddDoubleLinkedListToStart(list);
 
             Assert.AreEqual(expectedArrayList, actual);
         }
@@ -492,7 +467,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
                 DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
-                actual.AddListToStart(list);
+                actual.AddDoubleLinkedListToStart(list);
             });
         }
 
@@ -506,7 +481,7 @@ namespace List.Tests
             DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
             DoubleLinkedList expectedArrayList = DoubleLinkedList.Create(expectedArray);
 
-            actual.AddListByIndex(list, index);
+            actual.AddDoubleLinkedListByIndex(list, index);
 
             Assert.AreEqual(expectedArrayList, actual);
         }
@@ -518,7 +493,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
                 DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
-                actual.AddListByIndex(list, index);
+                actual.AddDoubleLinkedListByIndex(list, index);
             });
         }
 
@@ -529,7 +504,7 @@ namespace List.Tests
             {
                 DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
                 DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
-                actual.AddListByIndex(list, index);
+                actual.AddDoubleLinkedListByIndex(list, index);
             });
         }
 
