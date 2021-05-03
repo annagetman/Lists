@@ -574,14 +574,14 @@ namespace List
             if (Length != 0)
             {
                 Node current = _root;
-                string s = current.Value + " ";
+                string str = current.Value + " ";
 
                 while (!(current.Next is null))
                 {
                     current = current.Next;
-                    s += current.Value + " ";
+                    str += current.Value + " ";
                 }
-                return s;
+                return str.Trim();
             }
             else
             {

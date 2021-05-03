@@ -341,8 +341,8 @@ namespace List.Tests
             Assert.AreEqual(expectedArrayList, actual);
         }
 
-        [TestCase(new int[] { 1, 2, 3 }, "1 2 3 ")]
-        [TestCase(new int[] { 1 }, "1 ")]
+        [TestCase(new int[] { 1, 2, 3 }, "1 2 3")]
+        [TestCase(new int[] { 1 }, "1")]
         [TestCase(new int[] { }, "")]
         public void ToString_WhenArrayListPassed_ShouldString(int[] array, string expected)
         {

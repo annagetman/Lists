@@ -24,7 +24,7 @@ namespace List
         {
             get
             {
-                if ((index < Length) && (index >= 0))
+                if (index < Length && index >= 0)
                 {
                     return _array[index];
                 }
@@ -35,7 +35,7 @@ namespace List
             }
             set
             {
-                if ((index < Length) && (index >= 0))
+                if (index < Length && index >= 0)
                 {
                     _array[index] = value;
                 }
@@ -179,7 +179,7 @@ namespace List
         {
             if (nvalue < Length)
             {
-                if (!(nvalue < 0))
+                if (nvalue >= 0 )
                 {
                     Length -= nvalue;
                     ReSize();
@@ -207,7 +207,7 @@ namespace List
         {
             if (nvalue < Length)
             {
-                if (!(nvalue < 0))
+                if (nvalue >= 0)
                 {
                     for (int i = nvalue; i < Length; i++)
                     {
@@ -301,7 +301,7 @@ namespace List
         //поиск индекс максимального элемента
         public int SearchIndexMaxElement()
         {
-            if (!(Length == 0))
+            if (Length != 0)
             {
                 int maxIndexOfElement = 0;
 
@@ -356,7 +356,7 @@ namespace List
         }
 
         //сортировка по возрастанию
-        public void SortAscending()//
+        public void SortAscending()
         {
             int j;
             int temp;
@@ -401,7 +401,7 @@ namespace List
         {
             int index = SearchFirstIndexByValue(value);
 
-            if (!(index == -1))
+            if (index != -1)
             {
                 RemoveElementByIndex(index);
             }
@@ -520,20 +520,12 @@ namespace List
         }
         public override string ToString()
         {
-            StringBuilder result = new StringBuilder();
-
+            string result = string.Empty;
             for (int i = 0; i < Length; i++)
             {
-                if (i == Length - 1)
-                {
-                    result.Append(_array[i]);
-                }
-                else
-                {
-                    result.Append(_array[i] + " ");
-                }
+                result += _array[i] + " ";
             }
-            return result.ToString();
+            return result.Trim();
         }
     }
 }

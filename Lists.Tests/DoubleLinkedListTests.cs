@@ -47,7 +47,7 @@ namespace List.Tests
         [TestCase(3, new int[] { 1, 2 }, new int[] { 1, 2, 3 })]
         [TestCase(5, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4, 5 })]
         [TestCase(1, new int[] { }, new int[] { 1 })]
-        public void AddValue_WhenValuePassed_AddValueToLast(int value, int[] actualArray, int[] expectedArray)
+        public void AddValue_WhenValuePassed_AddValueToEnd(int value, int[] actualArray, int[] expectedArray)
         {
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList expected = DoubleLinkedList.Create(expectedArray);
@@ -479,11 +479,11 @@ namespace List.Tests
         {
             DoubleLinkedList actual = DoubleLinkedList.Create(actualArray);
             DoubleLinkedList list = DoubleLinkedList.Create(arrayForList);
-            DoubleLinkedList expectedArrayList = DoubleLinkedList.Create(expectedArray);
+            DoubleLinkedList expectedDoubleLinkedList = DoubleLinkedList.Create(expectedArray);
 
             actual.AddDoubleLinkedListByIndex(list, index);
 
-            Assert.AreEqual(expectedArrayList, actual);
+            Assert.AreEqual(expectedDoubleLinkedList, actual);
         }
 
         [TestCase(new int[] { 1, 2, 3 }, 2, new int[] { })]
@@ -497,7 +497,7 @@ namespace List.Tests
             });
         }
 
-        [TestCase(new int[] { 1, 2, 3 }, 5, new int[] { 5, 7, 9 })]
+        [TestCase(new int[] { 1, 2, 3 }, 8, new int[] { 5, 6, 7 })]
         public void AddListByIndex_WhenMethodCalled_ReturnIndexOutOfRangeException(int[] actualArray, int index, int[] arrayForList)
         {
             Assert.Throws<IndexOutOfRangeException>(() =>
@@ -508,8 +508,8 @@ namespace List.Tests
             });
         }
 
-        [TestCase(new int[] { 2, 4, 6 }, "2 4 6 ")]
-        [TestCase(new int[] { 5 }, "5 ")]
+        [TestCase(new int[] { 1, 2, 3 }, "1 2 3")]
+        [TestCase(new int[] { 1 }, "1")]
         [TestCase(new int[] { }, "")]
         public void ToString_WhenArrayListPassed_ShouldString(int[] array, string expected)
         {
