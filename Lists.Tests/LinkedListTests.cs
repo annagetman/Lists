@@ -9,9 +9,7 @@ namespace List.Tests
         public void GetIndex_WhenIndex_ShouldValueByIndex(int index, int[] actualArray, int expected)
         {
             LinkedList expectedArray = LinkedList.Create(actualArray);
-
             int actual = expectedArray[index];
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -29,7 +27,6 @@ namespace List.Tests
         {
             LinkedList actualList = new LinkedList();
             int actual = actualList.Length;
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -41,9 +38,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.Add(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -55,9 +50,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.AddValueToStart(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -69,9 +62,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.AddValueByIndex(value, index);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -81,9 +72,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveElementFromEnd();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -94,9 +83,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveElementFromStart();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -107,9 +94,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveElementByIndex(index);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -121,9 +106,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveNElementsFromEnd(Nvalue);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -135,9 +118,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemovNElementsFromStart(nvalue);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -149,9 +130,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveNElementsByIndex(nvalue, index);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -161,9 +140,7 @@ namespace List.Tests
         public void SearchFirstIndexByValue(int value, int[] actualArray, int expected)
         {
             LinkedList array = LinkedList.Create(actualArray);
-
             int actual = array.SearchFirstIndexByValue(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -175,9 +152,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.Reverse();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -188,7 +163,6 @@ namespace List.Tests
         {
             LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchIndexMaxElement();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -209,7 +183,6 @@ namespace List.Tests
         {
             LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchIndexMinElement();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -230,7 +203,6 @@ namespace List.Tests
         {
             LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchValueMaxElement();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -241,7 +213,6 @@ namespace List.Tests
         {
             LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchValueMinElement();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -252,9 +223,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.SortAscending();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -266,9 +235,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.DescendingSort();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -280,9 +247,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveElementByValue(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -294,9 +259,7 @@ namespace List.Tests
         {
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList expected = LinkedList.Create(expectedArray);
-
             actual.RemoveAllElementsByValue(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -310,9 +273,7 @@ namespace List.Tests
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList list = LinkedList.Create(arrayForList);
             LinkedList expectedArrayList = LinkedList.Create(expectedArray);
-
             actual.AddLinkedListByIndex(list, index);
-
             Assert.AreEqual(expectedArrayList, actual);
         }
 
@@ -335,9 +296,7 @@ namespace List.Tests
             LinkedList actual = LinkedList.Create(actualArray);
             LinkedList list = LinkedList.Create(arrayForList);
             LinkedList expectedArrayList = LinkedList.Create(expectedArray);
-
             actual.AddLinkedListToStart(list);
-
             Assert.AreEqual(expectedArrayList, actual);
         }
 
@@ -347,9 +306,7 @@ namespace List.Tests
         public void ToString_WhenArrayListPassed_ShouldString(int[] array, string expected)
         {
             LinkedList arrayList = LinkedList.Create(array);
-
             string actual = arrayList.ToString();
-
             Assert.AreEqual(expected, actual);
         }
     }

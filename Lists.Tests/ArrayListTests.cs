@@ -11,9 +11,7 @@ namespace List.Tests
         public void GetIndex_WhenIndex_ShouldValueByIndex(int index, int[] actualArray, int expected)
         {
             ArrayList expectedArray = ArrayList.Create(actualArray);
-
             int actual = expectedArray[index];
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -22,7 +20,6 @@ namespace List.Tests
         {
             ArrayList actualList = new ArrayList();
             int actual = actualList.Length;
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -31,7 +28,6 @@ namespace List.Tests
         {
             ArrayList actualList = new ArrayList(value);
             int actual = actualList.Length;
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -53,9 +49,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.Add(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -68,9 +62,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.AddValueToStart(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -83,9 +75,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.AddValueByIndex(value, index);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -110,7 +100,6 @@ namespace List.Tests
             ArrayList expected = ArrayList.Create(expectedArray);
 
             actual.RemoveElementFromEnd();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -133,9 +122,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveElementFromStart();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -158,9 +145,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveElementByIndex(index);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -185,9 +170,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveNElementsFromEnd(Nvalue);
-
             Assert.AreEqual(expected, actual);
         }
         [TestCase(1, new int[] { }, new int[] { })]
@@ -210,9 +193,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveNElementsFromStart(Nvalue);
-
             Assert.AreEqual(expected, actual);
         }
         [TestCase(1, new int[] { }, new int[] { })]
@@ -233,9 +214,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveNElementsByIndex(index, Nvalue);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -246,9 +225,7 @@ namespace List.Tests
         public void SearchFirstIndexByValue(int value, int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);
-
             int actual = array.SearchFirstIndexByValue(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -261,9 +238,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.Reverse();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -274,9 +249,7 @@ namespace List.Tests
         public void Search_IndexMaxElement(int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);
-
             int actual = array.SearchIndexMaxElement();
-
             Assert.AreEqual(expected, actual);
         }
         [TestCase(new int[] { }, 5)]
@@ -296,9 +269,7 @@ namespace List.Tests
         public void Search_IndexMinElement(int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);
-
             int actual = array.SearchIndexMinElement();
-
             Assert.AreEqual(expected, actual);
         }
         [TestCase(new int[] { }, 5)]
@@ -318,9 +289,7 @@ namespace List.Tests
         public void Search_ValueMaxElement(int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);
-
             int actual = array.SearchValueMaxElement();
-
             Assert.AreEqual(expected, actual);
         }
         [TestCase(new int[] { }, 5)]
@@ -340,9 +309,7 @@ namespace List.Tests
         public void Search_ValueMinElement(int[] actualArray, int expected)
         {
             ArrayList array = ArrayList.Create(actualArray);
-
             int actual = array.SearchValueMinElement();
-
             Assert.AreEqual(expected, actual);
         }
         [TestCase(new int[] { }, 5)]
@@ -362,9 +329,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.SortAscending();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -376,9 +341,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.DescendingSort();
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -390,9 +353,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveElementByValue(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -404,9 +365,7 @@ namespace List.Tests
         {
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
-
             actual.RemoveAllElementsByValue(value);
-
             Assert.AreEqual(expected, actual);
         }
 
@@ -418,9 +377,7 @@ namespace List.Tests
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList list = ArrayList.Create(arrayForList);
             ArrayList expectedArrayList = ArrayList.Create(expectedArray);
-
             actual.AddArrayList(list);
-
             Assert.AreEqual(expectedArrayList, actual);
         }
 
@@ -432,9 +389,7 @@ namespace List.Tests
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList list = ArrayList.Create(arrayForList);
             ArrayList expectedArrayList = ArrayList.Create(expectedArray);
-
             actual.AddArrayListToStart(list);
-
             Assert.AreEqual(expectedArrayList, actual);
         }
 
@@ -447,9 +402,7 @@ namespace List.Tests
             ArrayList actual = ArrayList.Create(actualArray);
             ArrayList expected = ArrayList.Create(expectedArray);
             ArrayList addList = ArrayList.Create(new int[] { 77, 77, 77 });
-
             actual.AddArrayListByIndex(addList, index);
-
             Assert.AreEqual(expected, actual);
         }
 
