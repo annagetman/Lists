@@ -6,9 +6,7 @@ namespace List
 {
     public class LinkedList
     {
-        private Node _root;
-        private Node _tail;
-
+       
         public int Length { get; private set; }
         public int this[int index]
         {
@@ -21,6 +19,9 @@ namespace List
                 GetNodeByIndex(index).Value = value;
             }
         }
+
+        private Node _root;
+        private Node _tail;
 
         public LinkedList()
         {

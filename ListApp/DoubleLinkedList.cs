@@ -6,10 +6,32 @@ namespace List
 {
     public class DoubleLinkedList
     {
-        private DNode _root;
-        private DNode _tail;
 
         public int Length { get; private set; }
+
+        public int this[int index]
+        {
+            get
+            {
+                return GetNodeByIndex(index).Value;
+            }
+            set
+            {
+                GetNodeByIndex(index).Value = value;
+            }
+        }
+
+        private DNode _root;
+
+        private DNode _tail;
+
+        public DoubleLinkedList()
+        {
+            Length = 0;
+            _root = null;
+            _tail = null;
+        }
+
         private DoubleLinkedList(int[] values)
         {
             Length = values.Length;
@@ -56,31 +78,12 @@ namespace List
             }
         }
 
-        public int this[int index]
-        {
-            get
-            {
-                return GetNodeByIndex(index).Value;
-            }
-            set
-            {
-                GetNodeByIndex(index).Value = value;
-            }
-        }
-
-        public DoubleLinkedList()
-        {
-            Length = 0;
-            _root = null;
-            _tail = null;
-        }
         public DoubleLinkedList(int value)
         {
             Length = 1;
             _root = new DNode(value);
             _tail = _root;
         }
-
 
         public static DoubleLinkedList Create(int[] values)
         {

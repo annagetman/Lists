@@ -4,22 +4,9 @@ using System.Text;
 namespace List
 {
     public class ArrayList
-    {
-        private int[] _array;
-
+    {    
         public int Length { get; private set; }
 
-        private ArrayList(int[] array)
-        {
-            Length = array.Length;
-
-            _array = new int[Length];
-
-            for (int i = 0; i < Length; i++)
-            {
-                _array[i] = array[i];
-            }
-        }
         public int this[int index]
         {
             get
@@ -46,6 +33,8 @@ namespace List
             }
         }
 
+        private int[] _array;
+
         public ArrayList()
         {
             Length = 0;
@@ -57,6 +46,18 @@ namespace List
             Length = 1;
             _array = new int[10];
             _array[0] = value;
+        }
+
+        private ArrayList(int[] array)
+        {
+            Length = array.Length;
+
+            _array = new int[Length];
+
+            for (int i = 0; i < Length; i++)
+            {
+                _array[i] = array[i];
+            }
         }
 
         public static ArrayList Create(int[] values)
@@ -234,11 +235,11 @@ namespace List
         }
 
         //удаление по индексу N элементов
-        public void RemoveNElementsByIndex(int Nvalue, int index)
+        public void RemoveNElementsByIndex(int nvalue, int index)
         {
-            if (index >= 0 && index < Length && Nvalue >= 0)
+            if (index >= 0 && index < Length && nvalue >= 0)
             {
-                if (Nvalue + index > Length)
+                if (nvalue + index > Length)
                 {
                     Length = index;
                 }
@@ -246,16 +247,16 @@ namespace List
                 {
                     for (int i = index; i < Length; i++)
                     {
-                        if (i + Nvalue < _array.Length)
+                        if (i + nvalue < _array.Length)
                         {
-                            _array[i] = _array[i + Nvalue];
+                            _array[i] = _array[i + nvalue];
                         }
                     }
-                    Length -= Nvalue;
+                    Length -= nvalue;
                 }
                 ReSize();
             }
-            else if (Nvalue < 0)
+            else if (nvalue < 0)
             {
                 throw new ArgumentException("Incorrect n");
             }
@@ -483,20 +484,6 @@ namespace List
             }
         }
 
-        private void ReSize()
-        {
-            if (Length >= _array.Length)
-            {
-                int newLenght = (int)(Length * 1.33 + 1);
-                int[] tmpArray = new int[newLenght];
-
-                for (int i = 0; i < _array.Length; i++)
-                {
-                    tmpArray[i] = _array[i];
-                }
-                _array = tmpArray;
-            }
-        }
         public override bool Equals(object obj)
         {
             if (obj is null)
@@ -526,6 +513,21 @@ namespace List
                 result += _array[i] + " ";
             }
             return result.Trim();
+        }
+
+        private void ReSize()
+        {
+            if (Length >= _array.Length)
+            {
+                int newLenght = (int)(Length * 1.33 + 1);
+                int[] tmpArray = new int[newLenght];
+
+                for (int i = 0; i < _array.Length; i++)
+                {
+                    tmpArray[i] = _array[i];
+                }
+                _array = tmpArray;
+            }
         }
     }
 }
