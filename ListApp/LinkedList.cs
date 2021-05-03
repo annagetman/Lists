@@ -57,6 +57,16 @@ namespace List
             }
         }
 
+        public static LinkedList Create(int[] values)
+        {
+            if (!(values is null))
+            {
+                return new LinkedList(values);
+            }
+
+            throw new NullReferenceException("Values is null");
+        }
+
         public void Add(int value)
         {
             if (Length != 0)
@@ -176,7 +186,7 @@ namespace List
         {
             if (nvalue < Length)
             {
-                if (nvalue !< 0)
+                if (!(nvalue < 0))
                 {
                     Node current = GetNodeByIndex(Length - nvalue);
                     current.Next = _tail;
@@ -204,7 +214,7 @@ namespace List
         {
             if (nvalue < Length)
             {
-                if (nvalue !< 0)
+                if (!(nvalue < 0))
                 {
                     Node current = GetNodeByIndex(nvalue - 1);
                     _root = current.Next;

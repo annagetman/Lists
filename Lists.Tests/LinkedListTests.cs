@@ -5,14 +5,42 @@ namespace List.Tests
 {
     class LinkedListTests
     {
+        [TestCase(1, new int[] { 1, 2, 3 }, 2)]
+        public void GetIndex_WhenIndex_ShouldValueByIndex(int index, int[] actualArray, int expected)
+        {
+            LinkedList expectedArray = LinkedList.Create(actualArray);
+
+            int actual = expectedArray[index];
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(null)]
+        public void LinkedListConstructor_WhenListPassed_ShouldArgumentNullException(int[] actualArray)
+        {
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                LinkedList.Create(null);
+            });
+        }
+
+        [TestCase(0)]
+        public void LinkedListConstructor_WhenObjectOfAClassIsCreated_LengthEqualsZero(int expected)
+        {
+            LinkedList actualList = new LinkedList();
+            int actual = actualList.Length;
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestCase(3, new int[] { 1, 2 }, new int[] { 1, 2, 3 })]
         [TestCase(5, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4, 5 })]
         [TestCase(1, new int[] { 1, 2, 35 }, new int[] { 1, 2, 35, 1 })]
         [TestCase(0, new int[] { 1, 2, 35 }, new int[] { 1, 2, 35, 0 })]
         public void Add_ValueToEnd(int value, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.Add(value);
 
@@ -25,8 +53,8 @@ namespace List.Tests
         [TestCase(0, new int[] { 1, 2, 35 }, new int[] { 0, 1, 2, 35, })]
         public void Add_ValueToStart(int value, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.AddValueToStart(value);
 
@@ -39,8 +67,8 @@ namespace List.Tests
         [TestCase(8, 3, new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 8, 4 })]
         public void Add_ValueByIndex(int value, int index, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.AddValueByIndex(value, index);
 
@@ -51,8 +79,8 @@ namespace List.Tests
         [TestCase(new int[] { 1 }, new int[] { })]
         public void Remove_LastElement(int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveElementFromEnd();
 
@@ -64,8 +92,8 @@ namespace List.Tests
         [TestCase(new int[] { 6, 1, 2 }, new int[] { 1, 2 })]
         public void Remove_ElementFromStart(int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveElementFromStart();
 
@@ -77,8 +105,8 @@ namespace List.Tests
         [TestCase(2, new int[] { 1, 2, 5, 3, }, new int[] { 1, 2, 3 })]
         public void Remove_ElementByIndex(int index, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveElementByIndex(index);
 
@@ -91,8 +119,8 @@ namespace List.Tests
 
         public void Remove_NElementsFromEnd(int Nvalue, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveNElementsFromEnd(Nvalue);
 
@@ -105,8 +133,8 @@ namespace List.Tests
         [TestCase(4, new int[] { 1, 2, 3, 4, 5 }, new int[] { 5 })]
         public void RemoveNElementsFromStart_WhenNElements_RemoveNElements(int nvalue, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemovNElementsFromStart(nvalue);
 
@@ -119,8 +147,8 @@ namespace List.Tests
 
         public void RemoveByIndexNElements_WhenIndexAndNElements_RemoveByIndexNElements(int nvalue, int index, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveNElementsByIndex(nvalue, index);
 
@@ -132,7 +160,7 @@ namespace List.Tests
         [TestCase(3, new int[] { 0, 1, 2, 3 }, 3)]
         public void SearchFirstIndexByValue(int value, int[] actualArray, int expected)
         {
-            LinkedList array = new LinkedList(actualArray);
+            LinkedList array = LinkedList.Create(actualArray);
 
             int actual = array.SearchFirstIndexByValue(value);
 
@@ -145,8 +173,8 @@ namespace List.Tests
 
         public void Revers(int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.Reverse();
 
@@ -158,7 +186,7 @@ namespace List.Tests
         [TestCase(new int[] { 1, 2, 3, 1, 5, 6, 7, 9 }, 7)]
         public void FindMaxIndex_WhenMethodCalled_ReturnMaxIndex(int[] actualArray, int expected)
         {
-            LinkedList index = new LinkedList(actualArray);
+            LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchIndexMaxElement();
 
             Assert.AreEqual(expected, actual);
@@ -169,7 +197,7 @@ namespace List.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                LinkedList list = new LinkedList(actualArray);
+                LinkedList list = LinkedList.Create(actualArray);
                 int actual = list.SearchIndexMaxElement();
             });
         }
@@ -179,7 +207,7 @@ namespace List.Tests
         [TestCase(new int[] { 2, 6, 1, 4, 5 }, 2)]
         public void FindMinIndex_WhenMethodCalled_ReturnMinIndex(int[] actualArray, int expected)
         {
-            LinkedList index = new LinkedList(actualArray);
+            LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchIndexMinElement();
 
             Assert.AreEqual(expected, actual);
@@ -190,7 +218,7 @@ namespace List.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                LinkedList list = new LinkedList(actualArray);
+                LinkedList list = LinkedList.Create(actualArray);
                 int actual = list.SearchIndexMinElement();
             });
         }
@@ -200,7 +228,7 @@ namespace List.Tests
         [TestCase(new int[] { 2, 6, 1, 4, 5 }, 6)]
         public void FindValueOfMaxElem_WhenMethodCalled_ReturnMaxIndex(int[] actualArray, int expected)
         {
-            LinkedList index = new LinkedList(actualArray);
+            LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchValueMaxElement();
 
             Assert.AreEqual(expected, actual);
@@ -211,7 +239,7 @@ namespace List.Tests
         [TestCase(new int[] { 2, 6, 1, 4, 5 }, 1)]
         public void FindValueOfMinElem_WhenMethodCalled_ReturnValueOfMinElem(int[] actualArray, int expected)
         {
-            LinkedList index = new LinkedList(actualArray);
+            LinkedList index = LinkedList.Create(actualArray);
             int actual = index.SearchValueMinElement();
 
             Assert.AreEqual(expected, actual);
@@ -222,8 +250,8 @@ namespace List.Tests
         [TestCase(new int[] { 7 }, new int[] { 7 })]
         public void Sort_Ascending(int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.SortAscending();
 
@@ -236,8 +264,8 @@ namespace List.Tests
 
         public void Descending_Sort(int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.DescendingSort();
 
@@ -250,8 +278,8 @@ namespace List.Tests
 
         public void Remove_ElementByValue(int value, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveElementByValue(value);
 
@@ -264,8 +292,8 @@ namespace List.Tests
 
         public void Remove_AllElementsByValue(int value, int[] actualArray, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList expected = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList expected = LinkedList.Create(expectedArray);
 
             actual.RemoveAllElementsByValue(value);
 
@@ -279,9 +307,9 @@ namespace List.Tests
         [TestCase(new int[] { }, 0, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 })]
         public void AddLinkedListByIndex_WhenListAndIndexPassed_ThenAddLinkedListByIndex(int[] actualArray, int index, int[] arrayForList, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList list = new LinkedList(arrayForList);
-            LinkedList expectedArrayList = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList list = LinkedList.Create(arrayForList);
+            LinkedList expectedArrayList = LinkedList.Create(expectedArray);
 
             actual.AddLinkedListByIndex(list, index);
 
@@ -293,8 +321,8 @@ namespace List.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                LinkedList actual = new LinkedList(actualArray);
-                LinkedList list = new LinkedList(arrayForList);
+                LinkedList actual = LinkedList.Create(actualArray);
+                LinkedList list = LinkedList.Create(arrayForList);
                 actual.AddArrayList(list);
             });
         }
@@ -304,14 +332,25 @@ namespace List.Tests
         [TestCase(new int[] { 1, 2, 3 }, new int[] { 10 }, new int[] { 10, 1, 2, 3 })]
         public void AddListToStart_WhenListPassed_ThenAddLisToStart(int[] actualArray, int[] arrayForList, int[] expectedArray)
         {
-            LinkedList actual = new LinkedList(actualArray);
-            LinkedList list = new LinkedList(arrayForList);
-            LinkedList expectedArrayList = new LinkedList(expectedArray);
+            LinkedList actual = LinkedList.Create(actualArray);
+            LinkedList list = LinkedList.Create(arrayForList);
+            LinkedList expectedArrayList = LinkedList.Create(expectedArray);
 
             actual.AddLinkedListToStart(list);
 
             Assert.AreEqual(expectedArrayList, actual);
         }
 
+        [TestCase(new int[] { 1, 2, 3 }, "1 2 3 ")]
+        [TestCase(new int[] { 1 }, "1 ")]
+        [TestCase(new int[] { }, "")]
+        public void ToString_WhenArrayListPassed_ShouldString(int[] array, string expected)
+        {
+            LinkedList arrayList = LinkedList.Create(array);
+
+            string actual = arrayList.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
